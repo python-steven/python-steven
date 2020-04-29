@@ -1,0 +1,725 @@
+{% load static %}
+<div class="box yc">
+    <main role="main" class="col-md-12 col-lg-12 pt-3 px-4">
+        <div class="row col-md-12 text-center" style="border-bottom:1px solid #e5e9f2;">
+            <h3 class="lng" data-name="System">绑定管理</h3>
+        </div>
+        <div class="row col-md-12">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active lng" data-name="info" href="#" onclick="im_info();">信息导入</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link lng" data-name="bind" href="#" onclick="binding();">绑定</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link lng" href="#" data-name="release_bind" onclick="unbind();">编辑解绑</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link lng" href="#" data-name="alter_ParCode" onclick="Alter_ParCode();">代用/混用料维护</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link lng" href="#" data-name="bended" onclick="Box_Info();">信息查询</a>
+                </li>
+
+            </ul>
+        </div>
+
+        <div class = "import_info">
+            <div class="row col-md-12 text-left" style="padding-bottom:30px;">
+                <div class="row col-md-9">
+                    <div style="padding-top:0px; width:1110px; padding-bottom:0px;float:left">
+                        <div style="padding-top:10px; padding-bottom:10px;padding-right:10px;float:left">
+                            <span data-toggle="model" >
+                                <img alt="Add" src="{% static 'images/add.png' %}"> modelstageId:
+                                <input name="txtModelstageID" type="text" maxlength="80" id="import_Models" placeholder="modelID" onchange="import_model(this);"  style="height:36px;width:200px;"/>
+
+                            </span>
+                        </div>
+                        <div style="padding-top:10px; padding-bottom:10px;padding-right:10px;float:left">
+                            <span data-toggle="model" >
+                                <img alt="Add" src="{% static 'images/add.png' %}"> SN:
+                                <input name="txtSN" type="text" maxlength="80" id="import_SNs" placeholder="SN" onchange="SN_import(this);"  style="height:36px;width:200px;"/>
+                            </span>
+                        </div>
+                        <!--<div style="padding-top:10px; padding-bottom:10px;padding-right:10px;float:left">-->
+                            <!--<a href="#" style="padding-top:10px; padding-bottom:10px;padding-right:10px;">-->
+                                <!--<span data-toggle="modal" data-target="#add-BoxIDs" onclick="get_BoxID()">-->
+                                <!--<img alt="Add" src="{% static 'images/add.png' %}"> 添加BoxId:-->
+                                <!--</span>-->
+                            <!--</a>-->
+                        <!--</div>-->
+                        <div style="padding-top:10px; padding-bottom:10px;padding-right:10px;float:left">
+                            <span data-toggle="model" >
+                                <img alt="Add" src="{% static 'images/add.png' %}"> BoxId:
+                                <input name="txtSN" type="text" maxlength="80" id="import_Box" placeholder="BOX" onchange="add_Box(this);"  style="height:36px;width:200px;"/>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-striped table-sm">
+                        <thead>
+                            <tr>
+                                <th class="lng" data-name="SerialNumber">序列号</th>
+                                <th class="lng" data-name="MaterialNumber">SN</th>
+                                <th class="lng" data-name="MaterialNumber">料号</th>
+                            </tr>
+                        </thead>
+                        <tbody id="import_sn">
+                        </tbody>
+                    </table>
+                    <br/>
+                    <table class="table table-striped table-sm">
+                        <thead>
+                            <tr>
+                                <th class="lng" data-name="SerialNumber">序列号</th>
+                                <th class="lng" data-name="Model">modelStageId</th>
+                                <th class="lng" data-name="MaterialNumber">料号</th>
+                                <th class="lng" data-name="PartName">品名</th>
+                                <th class="lng" data-name="Requirement">需求数量</th>
+                                <th class="lng" data-name="ifAlternative">代用料(1)/混料(2)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="import_mode">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class = "models yc">
+            <div class="row col-md-12 text-left" style="padding-bottom:30px;">
+                <div class="row col-md-9">
+                    <!--<div style="padding-top:10px; padding-bottom:10px;padding-right:10px;float:left">-->
+                        <!--<a href="#" style="padding-top:10px; padding-bottom:10px;padding-right:10px;">-->
+                            <!--<span data-toggle="modal" data-target="#ModeBox" >-->
+                                <!--<img alt="Add" src="{% static 'images/add.png' %}"> BoxId:-->
+                            <!--</span>-->
+                        <!--</a>-->
+                    <!--</div>-->
+                    <div style="padding-top:10px; padding-bottom:10px;padding-right:10px;float:left">
+                        <span data-toggle="model" class="Box_Id_info" >
+                            <img alt="Add" src="{% static 'images/add.png' %}"> BoxId:
+                            <input name="txtBoxId" type="text" maxlength="100" id="BoxId" placeholder="格式:BOX1234567" onchange="Box_check(this);" style="height:36px;width:200px;"/>
+                        </span>
+                    </div>
+                    <div style="padding-top:10px; padding-bottom:10px;padding-right:10px;float:left">
+                        <span data-toggle="model" >
+                            <img alt="Add" src="{% static 'images/add.png' %}"> modelstageId:
+                            <input name="txtModelstageID" type="text" maxlength="100" id="txtModelstageID" placeholder="modelID" onchange="ModelID(this);"  style="height:36px;width:200px;"/>
+
+                        </span>
+                    </div>
+                    <div style="padding-top:10px; padding-bottom:10px;padding-right:10px;float:left">
+                        <span data-toggle="model" >
+                            <img alt="Add" src="{% static 'images/add.png' %}"> SN:
+                            <input name="txtSN" type="text" maxlength="100" id="brushSN" placeholder="SN" onchange="SN_info(this);"  style="height:36px;width:200px;"/>
+                        </span>
+                    </div>
+                    <div style="padding-top:10px; padding-bottom:10px;padding-right:10px;float:left">
+                        <span>
+                            <input type="button" class="btn btn-info" onclick="Clear();" value="清除"/>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-striped table-sm">
+                        <thead>
+                            <tr>
+                                <th class="lng" data-name="SerialNumber">序列号</th>
+                                <th class="lng" data-name="Model">modelStageId</th>
+                                <th class="lng" data-name="MaterialNumber">料号</th>
+                                <th class="lng" data-name="PartName">品名</th>
+                                <th class="lng" data-name="Requirement">需求数量</th>
+                                <th class="lng" data-name="BrushQuantity">已刷数量</th>
+                                <th class="lng" data-name="BrushSN">已刷SN</th>
+                                <th class="lng" data-name="ifAlternative">代用料(1)/混料(2)</th>
+                                <th class="lng" data-name="ifAlternative">代用料号/混用料号</th>
+                                <th class="lng" data-name="Status">状态</th>
+                            </tr>
+                        </thead>
+                        <tbody id="search_model">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="unbinding yc">
+            <div class="row col-md-12 text-left" style="padding-bottom:30px;">
+                <div class="row col-md-9">
+                    <a href="javascript:void(0)" style="padding-top:10px; padding-bottom:10px;padding-right:10px;" data-toggle="modal" data-target="#unbinding_html" onclick="unbinding_modelStage();">
+                        <img alt="Add" src="{% static 'images/unlink.png' %}"> 一键解绑
+                    </a>
+                    <a href="javascript:void(0)" style="padding-top:10px; padding-bottom:10px;padding-right:10px;" data-toggle="modal" data-target="#query_model">
+                        <img alt="Add" src="{% static 'images/filter.png' %}"> 筛选
+                    </a>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped table-sm">
+                      <thead>
+                        <tr>
+
+                            <th >
+                                <!--<input type="checkbox" name="PartCode" id="bindingBox">-->
+                                <!--<label class="yc">全选</label>-->
+                            </th>
+                            <th class="lng" data-name="Model">操作</th>
+                            <th class="lng" data-name="Model">BoxID</th>
+                            <th class="lng" data-name="Model">ModelStageID</th>
+                            <th class="lng" data-name="MaterialNumber">料号</th>
+                            <th class="lng" data-name="PartName">品名</th>
+                            <th class="lng" data-name="Requirement">需求数量</th>
+                            <th class="lng" data-name="BrushQuantity">已刷数量</th>
+                            <th class="lng" data-name="BrushSN">已刷SN</th>
+                            <th class="lng" data-name="ifAlternative">代用/混料号</th>
+                            <th class="lng" data-name="Status">状态</th>
+                        </tr>
+                      </thead>
+                      <tbody id="unbinding_add_html">
+
+                      </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class = "alter_parCode yc">
+            <div class="row col-md-12 text-left" style="padding-bottom:30px;">
+                <div class="row col-md-9">
+                    <a href="javascript:void(0)" style="padding-top:10px; padding-bottom:10px;padding-right:10px;" data-toggle="modal" data-target="#query_ParCodes" >
+                        <img alt="Add" src="{% static 'images/filter.png' %}"> 筛选
+                    </a>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped table-sm">
+                      <thead>
+                        <tr>
+                            <th class="lng" data-name="SerialNumber">操作</th>
+                            <th class="lng" data-name="Model">model</th>
+                            <th class="lng" data-name="MaterialNumber">料号</th>
+                            <th class="lng" data-name="PartName">品名</th>
+                            <!--<th class="lng" data-name="Requirement">需求数量</th>-->
+                            <!--<th class="lng" data-name="BrushQuantity">已刷数量</th>-->
+                            <th class="lng" data-name="ifAlternative">代用料(1)/混料(2)</th>
+                            <th class="lng" data-name="Alternative_No">代用料号/混用料号</th>
+                            <!--<th class="lng" data-name="Status">状态</th>-->
+                        </tr>
+                      </thead>
+                      <tbody id="Al_ParCode">
+
+                      </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class = "banded yc">
+            <div class="row col-md-12 text-left" style="padding-bottom:30px;">
+                <div class="row col-md-9">
+                     <a href="javascript:void(0)" style="padding-top:10px; padding-bottom:10px;padding-right:10px;"><span onclick="change_binding();">
+                        <img alt="Add" src="{% static 'images/export.gif' %}"> 下载</span>
+                    </a>
+                    <a href="javascript:void(0)" style="padding-top:10px; padding-bottom:10px;padding-right:10px;" data-toggle="modal" data-target="#all_query_info" >
+                        <img alt="Add" src="{% static 'images/filter.png' %}"> 筛选
+                    </a>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped table-sm">
+                      <thead>
+                        <tr>
+                            <th class="lng" data-name="SerialNumber">BoxID</th>
+                            <th class="lng" data-name="Model">ModelStageID</th>
+                            <th class="lng" data-name="MaterialNumber">料号</th>
+                            <th class="lng" data-name="PartName">品名</th>
+                            <th class="lng" data-name="Requirement">需求数量</th>
+                            <th class="lng" data-name="BrushQuantity">已刷数量</th>
+                            <th class="lng" data-name="BrushSN">已刷SN</th>
+                            <th class="lng" data-name="ifAlternative">代用(1)/混料(2)</th>
+                            <th class="lng" data-name="ifAlternative">代用/混料号</th>
+                            <th class="lng" data-name="Status">状态</th>
+                        </tr>
+                      </thead>
+                      <tbody id="query_info_data">
+
+                      </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="modal fade" id="add-BoxIDs" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+          <div class="modal-dialog" >
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">添加Box</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              </div>
+              <form class="form-horizontal" role="form" autocomplete="off">
+                <div class="modal-body">
+                    <div class="form-group row">
+                        <label for="input_note"  class="col-md-4 col-form-label">BOXID</label>
+                        <div class="col-md-8 has-feedback">
+                            <select class="form-control" id="b_number" name="box">
+                                <option value="BoxIdTest"></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+
+                  <button type="submit" class="btn btn-primary " data-dismiss="modal" onClick="added_Box();">确认</button>
+                  <button type="submit" class="btn btn-primary " data-dismiss="modal">关闭</button>
+                </div>
+              </form>
+            </div>
+          </div>
+    </div>
+
+    <div class="modal" id="query_model" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+          <div class="modal-dialog" >
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">筛选</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              </div>
+              <form class="form-horizontal" role="form" autocomplete="off" id="bud_code_query">
+                <div class="modal-body">
+                    <div class="form-group row" >
+                        <label for="input_note" class="col-md-4 col-form-label">BoxID</label>
+                        <div class="col-md-8 has-feedback">
+                            <input type="text" class="form-control input_class" id="query_BoxID" >
+                            <span class="help-block"></span>
+                            <span class="glyphiconglyphicon-ok form-control-feedback"></span>
+                        </div>
+                    </div>
+                    <!--<div class="form-group row" >-->
+                        <!--<label for="input_note" class="col-md-4 col-form-label">ModelStageID</label>-->
+                        <!--<div class="col-md-8 has-feedback">-->
+                            <!--<input type="text" class="form-control input_class" id="query_stageID" >-->
+                            <!--<span class="help-block"></span>-->
+                            <!--<span class="glyphiconglyphicon-ok form-control-feedback"></span>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <div class="form-group row">
+                        <label for="input_note" class="col-md-4 col-form-label">SN</label>
+                        <div class="col-md-8 has-feedback">
+                            <input type="text" class="form-control input_class" id="query_SNLink">
+                            <span class="help-block"></span>
+                            <span class="glyphiconglyphicon-ok form-control-feedback"></span>
+                        </div>
+                    </div>
+                    <!--<div class="form-group row">-->
+                        <!--<label for="input_note" class="col-md-4 col-form-label">开始日期</label>-->
+                        <!--<div class="col-md-8 has-feedback">-->
+                            <!--<input type="text" class="form-control input_class" id="dateformodel1" >-->
+                            <!--<span class="help-block"></span>-->
+                            <!--<span class="glyphiconglyphicon-ok form-control-feedback"></span>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="form-group row">-->
+                        <!--<label for="input_note" class="col-md-4 col-form-label">截止日期</label>-->
+                        <!--<div class="col-md-8 has-feedback">-->
+                            <!--<input type="text" class="form-control input_class" id="dateformodel2" >-->
+                            <!--<span class="help-block"></span>-->
+                            <!--<span class="glyphiconglyphicon-ok form-control-feedback"></span>-->
+                        <!--</div>-->
+                    <!--</div>-->
+
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary " data-dismiss="modal" onclick="query_model_info();">确定</button>
+                  <button type="submit" class="btn btn-primary " data-dismiss="modal">取消</button>
+                </div>
+              </form>
+            </div>
+          </div>
+    </div>
+
+    <div class="modal" id="unbinding_html" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+          <div class="modal-dialog" >
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">是否确定一键解绑</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              </div>
+              <form class="form-horizontal" role="form" autocomplete="off" id="unbindings">
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary " data-dismiss="modal" onclick="unbind_html();">确定</button>
+                  <button type="submit" class="btn btn-primary " data-dismiss="modal">取消</button>
+                </div>
+              </form>
+            </div>
+          </div>
+    </div>
+
+    <div class="modal" id="query_ParCodes" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+          <div class="modal-dialog" >
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">筛选</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              </div>
+              <form class="form-horizontal" role="form" autocomplete="off" id="ter_Parcode">
+                <div class="modal-body">
+                    <div class="form-group row" >
+                        <label for="input_note" class="col-md-4 col-form-label">PartCode</label>
+                        <div class="col-md-8 has-feedback">
+                            <input type="text" class="form-control input_class" id="q_PartCode" >
+                            <span class="help-block"></span>
+                            <span class="glyphiconglyphicon-ok form-control-feedback"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row" >
+                        <label for="input_note" class="col-md-4 col-form-label">ModelStageID</label>
+                        <div class="col-md-8 has-feedback">
+                            <input type="text" class="form-control input_class" id="q_stageID" >
+                            <span class="help-block"></span>
+                            <span class="glyphiconglyphicon-ok form-control-feedback"></span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary " data-dismiss="modal" onclick="alter_query();">确定</button>
+                  <button type="submit" class="btn btn-primary " data-dismiss="modal">取消</button>
+                </div>
+              </form>
+            </div>
+          </div>
+    </div>
+
+    <div class="modal" id="modify_ParCode" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+          <div class="modal-dialog" >
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">增加</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              </div>
+              <form class="form-horizontal" role="form" autocomplete="off" id="my_modes">
+                <div class="modal-body">
+                    <div class="form-group row" >
+                        <label for="input_note" class="col-md-4 col-form-label">代混用料类型</label>
+                        <div class="col-md-8 has-feedback" >
+                            <select class="form-control" id="alter_type">
+                                <option value="1" selected>1</option>
+                                <option value="2">2</option>
+                            </select>
+                            <span class="help-block"></span>
+                            <span class="glyphiconglyphicon-ok form-control-feedback"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row" >
+                        <label for="input_note" class="col-md-4 col-form-label">代用料号/混用料号</label>
+                        <div class="col-md-8 has-feedback" >
+                            <input type="text" class="form-control input_class yc" id="modelsId" >
+                            <input type="text" class="form-control input_class" id="ParCode_html" readonly unselectable="on" >
+                            <span class="glyphiconglyphicon-ok form-control-feedback"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row" >
+
+                        <label for="input_note" class="col-md-4 col-form-label">增加料号</label>
+                        <div class="col-md-8 has-feedback" >
+                            <!--<span class="help-block" id="ParCode_html"></span>-->
+                            <input type="text" class="form-control input_class" id="add_alP" >
+                            <span class="glyphiconglyphicon-ok form-control-feedback"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary " data-dismiss="modal" onclick="modify_alParCode();">确定</button>
+                  <button type="submit" class="btn btn-primary " data-dismiss="modal">取消</button>
+                </div>
+              </form>
+            </div>
+          </div>
+    </div>
+
+    <div class="modal" id="remove_ParCode" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+          <div class="modal-dialog" >
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">删除</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              </div>
+              <form class="form-horizontal" role="form" autocomplete="off" id="my_delete_ParCode">
+                <div class="modal-body">
+                    <div class="form-group row" >
+                        <label for="input_note" class="col-md-4 col-form-label">原有料号</label>
+                        <div class="col-md-8 has-feedback" >
+                            <input type="text" class="form-control input_class yc" id="mode_id_del" >
+                            <input type="text" class="form-control input_class" id="original_parcode" readonly unselectable="on" >
+                            <span class="glyphiconglyphicon-ok form-control-feedback"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row" >
+                        <label for="input_note" class="col-md-4 col-form-label">删除料号</label>
+                        <div class="col-md-8 has-feedback" >
+                            <input type="text" class="form-control input_class" id="del_parCodes">
+                            <span class="help-block"></span>
+                            <span class="glyphiconglyphicon-ok form-control-feedback"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary " data-dismiss="modal" onclick="delete_alParCode();">确定</button>
+                  <button type="submit" class="btn btn-primary " data-dismiss="modal">取消</button>
+                </div>
+              </form>
+            </div>
+          </div>
+    </div>
+
+    <div class="modal" id="all_query_info" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+          <div class="modal-dialog" >
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">筛选</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              </div>
+              <form class="form-horizontal" role="form" autocomplete="off" id="tb_info">
+                <div class="modal-body">
+                    <div class="form-group row" >
+                        <label for="input_note" class="col-md-4 col-form-label">BoxID : <input type="checkbox" name="BoxIDs" id="IF_check" value="false"></label>
+                        <div class="col-md-8 has-feedback">
+                            <input type="text" class="form-control input_class" id="all_query_BoxID" >
+                            <span class="help-block"></span>
+                            <span class="glyphiconglyphicon-ok form-control-feedback"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row" >
+                        <label for="input_note" class="col-md-4 col-form-label">ModelStageID :</label>
+                        <div class="col-md-8 has-feedback">
+                            <input type="text" class="form-control input_class" id="all_query_stageID" >
+                            <span class="help-block"></span>
+                            <span class="glyphiconglyphicon-ok form-control-feedback"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="input_note" class="col-md-4 col-form-label">SN :</label>
+                        <div class="col-md-8 has-feedback">
+                            <input type="text" class="form-control input_class" id="all_query_SNLink">
+                            <span class="help-block"></span>
+                            <span class="glyphiconglyphicon-ok form-control-feedback"></span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary " data-dismiss="modal" onclick="all_query_info();">确定</button>
+                  <button type="submit" class="btn btn-primary " data-dismiss="modal">取消</button>
+                </div>
+              </form>
+            </div>
+          </div>
+    </div>
+
+    <div class="modal" id="release_buddy" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+          <div class="modal-dialog" >
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">解绑SN</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              </div>
+              <form class="form-horizontal" role="form" autocomplete="off" id="release_form">
+                <div class="modal-body">
+                    <div class="form-group row" >
+                        <label for="input_note" class="col-md-4 col-form-label"> ModelStageID </label>
+                        <div class="col-md-8 has-feedback" >
+                            <input type="text" class="form-control input_class yc" id="release_Id" >
+                            <input type="text" class="form-control input_class" id="release_ModelStageID" readonly unselectable="on" >
+                        </div>
+                    </div>
+                    <div class="form-group row" >
+                        <label for="input_note" class="col-md-4 col-form-label">料号</label>
+                        <div class="col-md-8 has-feedback" >
+                            <input type="text" class="form-control input_class" id="release_part" readonly unselectable="on" >
+                            <span class="glyphiconglyphicon-ok form-control-feedback"></span>
+                        </div>
+                    </div>
+                    <!--<div class="form-group row" >-->
+
+                        <!--<label for="input_note" class="col-md-4 col-form-label">需求数量</label>-->
+                        <!--<div class="col-md-8 has-feedback" >-->
+                            <!--&lt;!&ndash;<span class="help-block" id="ParCode_html"></span>&ndash;&gt;-->
+                            <!--<input type="text" class="form-control input_class" id="release_requirement" readonly unselectable="on">-->
+                            <!--<span class="glyphiconglyphicon-ok form-control-feedback"></span>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="form-group row" >-->
+
+                        <!--<label for="input_note" class="col-md-4 col-form-label">已刷数量</label>-->
+                        <!--<div class="col-md-8 has-feedback" >-->
+                            <!---->
+                            <!--<span class="glyphiconglyphicon-ok form-control-feedback"></span>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <div class="form-group row" >
+
+                        <label for="input_note" class="col-md-4 col-form-label">已刷SN</label>
+                        <div class="col-md-8 has-feedback" >
+                            <!--<span class="help-block" id="ParCode_html"></span>-->
+                            <input type="text" class="form-control input_class yc" id="release_brushNumber">
+                            <input type="text" class="form-control input_class" id="check_Bush_SN" readonly unselectable="on">
+                            <span class="glyphiconglyphicon-ok form-control-feedback"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row" >
+
+                        <label for="input_note" class="col-md-4 col-form-label">解绑料号</label>
+                        <div class="col-md-8 has-feedback" >
+                            <!--<span class="help-block" id="ParCode_html"></span>-->
+                            <input type="text" class="form-control input_class" id="release_partCode" >
+                            <span class="glyphiconglyphicon-ok form-control-feedback"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary " data-dismiss="modal" onclick="release_PartCodes();">确定</button>
+                  <button type="submit" class="btn btn-primary " data-dismiss="modal">取消</button>
+                </div>
+              </form>
+            </div>
+          </div>
+    </div>
+
+    <div class="modal" id="modify_buddy" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+          <div class="modal-dialog" >
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">编辑</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              </div>
+              <form class="form-horizontal" role="form" autocomplete="off" id="release_modify">
+                <div class="modal-body">
+                    <div class="form-group row" >
+                        <label for="input_note" class="col-md-4 col-form-label"> ModelStageID </label>
+                        <div class="col-md-8 has-feedback" >
+                            <input type="text" class="form-control input_class yc" id="modify_Id" >
+                            <input type="text" class="form-control input_class" id="modify_ModelStageID" readonly unselectable="on" >
+                        </div>
+                    </div>
+                    <div class="form-group row" >
+                        <label for="input_note" class="col-md-4 col-form-label">料号</label>
+                        <div class="col-md-8 has-feedback" >
+                            <input type="text" class="form-control input_class" id="modify_part" readonly unselectable="on" >
+                            <span class="glyphiconglyphicon-ok form-control-feedback"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row" >
+                        <label for="input_note" class="col-md-4 col-form-label">已刷SN</label>
+                        <div class="col-md-8 has-feedback" >
+                            <input type="text" class="form-control input_class" id="modify_brushSN" readonly unselectable="on">
+                            <span class="glyphiconglyphicon-ok form-control-feedback"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row" >
+
+                        <label for="input_note" class="col-md-4 col-form-label">实际需求数量</label>
+                        <div class="col-md-8 has-feedback" >
+                            <input type="text" class="form-control input_class" id="modify_actual_re" readonly unselectable="on">
+                            <span class="glyphiconglyphicon-ok form-control-feedback"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row" >
+                        <label for="input_note" class="col-md-4 col-form-label">已刷数量</label>
+                        <div class="col-md-8 has-feedback" >
+                            <input type="text" class="form-control input_class" id="modify_brushNumber" readonly unselectable="on">
+                            <span class="glyphiconglyphicon-ok form-control-feedback"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row" >
+
+                        <label for="input_note" class="col-md-4 col-form-label">需求数量</label>
+                        <div class="col-md-8 has-feedback" >
+                            <input type="text" class="form-control input_class" id="modify_requirement">
+                            <span class="glyphiconglyphicon-ok form-control-feedback"></span>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary " data-dismiss="modal" onclick="modify_PartCodes();">确定</button>
+                  <button type="submit" class="btn btn-primary " data-dismiss="modal">取消</button>
+                </div>
+              </form>
+            </div>
+          </div>
+    </div>
+
+    <div class="modal" id="remove_buddy" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+          <div class="modal-dialog" >
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">删除料号</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              </div>
+              <form class="form-horizontal" role="form" autocomplete="off" id="remove_modify">
+                <div class="modal-body">
+                    <div class="form-group row" >
+                        <label for="input_note" class="col-md-4 col-form-label">ModelStageID</label>
+                        <div class="col-md-8 has-feedback" >
+                            <input type="text" class="form-control input_class yc" id="remove_Id" >
+                            <input type="text" class="form-control input_class" id="remove_ModelStageID" readonly unselectable="on" >
+                        </div>
+                    </div>
+                    <div class="form-group row" >
+                        <label for="input_note" class="col-md-4 col-form-label">料号</label>
+                        <div class="col-md-8 has-feedback" >
+                            <input type="text" class="form-control input_class" id="remove_part" readonly unselectable="on" >
+                            <span class="glyphiconglyphicon-ok form-control-feedback"></span>
+                        </div>
+                    </div>
+                    <!--<div class="form-group row" >-->
+
+                        <!--<label for="input_note" class="col-md-4 col-form-label">需求数量</label>-->
+                        <!--<div class="col-md-8 has-feedback" >-->
+                            <!--&lt;!&ndash;<span class="help-block" id="ParCode_html"></span>&ndash;&gt;-->
+                            <!--<input type="text" class="form-control input_class" id="release_requirement" readonly unselectable="on">-->
+                            <!--<span class="glyphiconglyphicon-ok form-control-feedback"></span>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="form-group row" >-->
+
+                        <!--<label for="input_note" class="col-md-4 col-form-label">已刷数量</label>-->
+                        <!--<div class="col-md-8 has-feedback" >-->
+                            <!---->
+                            <!--<span class="glyphiconglyphicon-ok form-control-feedback"></span>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="form-group row" >-->
+
+                        <!--<label for="input_note" class="col-md-4 col-form-label">已刷SN</label>-->
+                        <!--<div class="col-md-8 has-feedback" >-->
+                            <!--<input type="text" class="form-control input_class yc" id="remove_brushNumber">-->
+                            <!--<input type="text" class="form-control input_class" id="remove_Bush_SN" readonly unselectable="on">-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="form-group row" >-->
+
+                        <!--<label for="input_note" class="col-md-4 col-form-label">解绑料号</label>-->
+                        <!--<div class="col-md-8 has-feedback" >-->
+                            <!--<input type="text" class="form-control input_class" id="remove_partCode" >-->
+                        <!--</div>-->
+                    <!--</div>-->
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary " data-dismiss="modal" onclick="remove_PartCodes();">确定</button>
+                  <button type="submit" class="btn btn-primary " data-dismiss="modal">取消</button>
+                </div>
+              </form>
+            </div>
+          </div>
+    </div>
+
+</div>

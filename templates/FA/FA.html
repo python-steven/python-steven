@@ -1,0 +1,897 @@
+{% load static %}
+<div class="FA yc">
+    <main role="main" class="col-md-12 col-lg-12 pt-3 px-4">
+        <div class="row col-md-12 text-center" style="border-bottom:1px solid #e5e9f2;">
+            <h3 class="lng" data-name="System">治具FT问题分析</h3>
+        </div>
+        <div class="row col-md-12">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active lng" href="#" data-name="report" onclick="FA_report();">问题统计</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link lng" href="#" data-name="Equipment" onclick="FA_Equipment();">治具管理</a>
+                </li>
+
+
+                {% if user.Role == "admin" %}
+                    <li class="nav-item">
+                        <a class="nav-link  lng" data-name="Projects" href="#" onclick="FA_Projects();">机种</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link lng" data-name="Customers" href="#" onclick="FA_Customer();">客户</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link lng" href="#" data-name="BU" onclick="FA_bringBU();">BU</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link lng" href="#" data-name="Vendor" onclick="FA_vendor();">厂商</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link lng" href="#" data-name="Type" onclick="FA_Type();">类型</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link lng" href="#" data-name="Station" onclick="FA_Station();">站别</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link lng" href="#" data-name="Question" onclick="FA_Question();">问题</a>
+                    </li>
+                {% endif %}
+
+
+            </ul>
+        </div>
+
+        <div class="report ">
+            <div class="row col-md-12 text-left" style="padding-bottom:30px;">
+                <div class="row col-md-7">
+                    <a href="#" style="padding-top:10px; padding-bottom:10px;padding-right:10px;">
+                        <span data-toggle="modal" data-target="#add-Question">
+                            <img alt="Add" src="{% static 'images/add.png' %}"> 添加问题分析
+                        </span>
+                    </a>
+                </div>
+                <div style="max-height:31px; margin-bottom:2px; float:left;">
+                    <ul class="pagination">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="javascript:void(0)" onclick="" >TotalCount:<b id="total_count_20">0</b></a>
+                        </li>
+                        <li class="page-item disabled">
+                            <a class="page-link" href="javascript:void(0)" onclick="" >[ <b id="current_page_20">0</b>/<b id="total_page_20">0</b> ]</a>
+                        </li>
+                        <li class="page-item" type="button">
+                            <a class="page-link " href="javascript:void(0)" onclick="previous_question();" id="previous_quest">Previous</a>
+                        </li>
+
+                        <li class="page-item" type="button">
+                            <a class="page-link active" href="javascript:void(0)" onclick="next_question();" id="next_quest">Next</a>
+                        </li>
+                        <li class="page-item" type="button">
+                            <select class="pagination" style="width:100%;height:38px;border-color:#dee2e6;" id="question_setup">
+                                <option value="10" selected>10</option>
+                                <option value="20">20</option>
+                                <option value="30">30</option>
+                                <option value="40">40</option>
+                                <option value="50">50</option>
+                            </select>
+                        </li>
+                    </ul>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped table-sm">
+                      <thead>
+                        <tr>
+                          <th>操作</th>
+                          <th>日期</th>
+                          <th>治具编号</th>
+                          <th>客户</th>
+                          <th>线别</th>
+                          <th>站别</th>
+                          <th>问题描述</th>
+                          <th>根本原因</th>
+                          <th>解决方法</th>
+                          <th>修复时长</th>
+                          <th>问题归类</th>
+                          <th>分析人员</th>
+                          <th>附件</th>
+                          <th>Remark</th>
+                          <th>机种名称</th>
+                          <th>客户名称</th>
+                          <th>所属BU</th>
+                          <th>治具厂商</th>
+                          <th>治具类型</th>
+                        </tr>
+                      </thead>
+                      <tbody id="tab_Q_E">
+
+                      </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="Equipment yc">
+            <div class="row col-md-12 text-left" style="padding-bottom:30px;">
+                <div class="row col-md-7">
+                    <a href="#" style="padding-top:10px; padding-bottom:10px;padding-right:10px;">
+                        <span data-toggle="modal" data-target="#add-Equipment-manage">
+                            <img alt="Add" src="{% static 'images/add.png' %}"> 添加治具管理
+                        </span>
+                    </a>
+                </div>
+                <div style="max-height:31px; margin-bottom:2px; float:left;">
+                    <ul class="pagination">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="javascript:void(0)" onclick="" >TotalCount:<b id="total_count_21">0</b></a>
+                        </li>
+                        <li class="page-item disabled">
+                            <a class="page-link" href="javascript:void(0)" onclick="" >[ <b id="current_page_21">0</b>/<b id="total_page_21">0</b> ]</a>
+                        </li>
+                        <li class="page-item" type="button">
+                            <a class="page-link " href="javascript:void(0)" onclick="previous_M_E();" id="previous_M_E">Previous</a>
+                        </li>
+
+                        <li class="page-item" type="button">
+                            <a class="page-link active" href="javascript:void(0)" onclick="next_M_E();" id="next_M_E">Next</a>
+                        </li>
+                        <li class="page-item" type="button">
+                            <select class="pagination" style="width:100%;height:38px;border-color:#dee2e6;" id="M_E_setup">
+                                <option value="10" selected>10</option>
+                                <option value="20">20</option>
+                                <option value="30">30</option>
+                                <option value="40">40</option>
+                                <option value="50">50</option>
+                            </select>
+                        </li>
+                    </ul>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped table-sm">
+                      <thead>
+                        <tr>
+                          <th>操作</th>
+                          <th>治具编号</th>
+                          <th>机种名称</th>
+                          <th>客户名称</th>
+                          <th>所属BU</th>
+                          <th>治具厂商</th>
+                          <th>治具类型</th>
+                          <th>站别</th>
+                        </tr>
+                      </thead>
+                      <tbody id="tab_M_E">
+
+                      </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="Projects yc">
+            <div class="row col-md-12 text-left" style="padding-bottom:30px;">
+                <div class="row col-md-7">
+                    <a href="#" style="padding-top:10px; padding-bottom:10px;padding-right:10px;">
+                        <span data-toggle="modal" data-target="#add-Projects">
+                            <img alt="Add" src="{% static 'images/add.png' %}"> 添加机种
+                        </span>
+                    </a>
+                </div>
+                <div style="max-height:31px; margin-bottom:2px; float:left;">
+                    <ul class="pagination">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="javascript:void(0)" onclick="" >TotalCount:<b id="total_count_22">0</b></a>
+                        </li>
+                        <li class="page-item disabled">
+                            <a class="page-link" href="javascript:void(0)" onclick="" >[ <b id="current_page_22">0</b>/<b id="total_page_22">0</b> ]</a>
+                        </li>
+                        <li class="page-item" type="button">
+                            <a class="page-link " href="javascript:void(0)" onclick="previous_P_N();" id="previous_P_N">Previous</a>
+                        </li>
+
+                        <li class="page-item" type="button">
+                            <a class="page-link active" href="javascript:void(0)" onclick="next_P_N();" id="next_P_N">Next</a>
+                        </li>
+                        <li class="page-item" type="button">
+                            <select class="pagination" style="width:100%;height:38px;border-color:#dee2e6;" id="P_N_setup">
+                                <option value="10" selected>10</option>
+                                <option value="20">20</option>
+                                <option value="30">30</option>
+                                <option value="40">40</option>
+                                <option value="50">50</option>
+                            </select>
+                        </li>
+                    </ul>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped table-sm">
+                      <thead>
+                        <tr>
+                          <th>操作</th>
+                          <th>机种名称</th>
+                        </tr>
+                      </thead>
+                      <tbody id="tab_P_N">
+
+                      </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="Customers yc">
+            <div class="row col-md-12 text-left" style="padding-bottom:30px;">
+                <div class="row col-md-7">
+                    <a href="#" style="padding-top:10px; padding-bottom:10px;padding-right:10px;">
+                        <span data-toggle="modal" data-target="#add-customers">
+                            <img alt="Add" src="{% static 'images/add.png' %}"> 添加客户
+                        </span>
+                    </a>
+                </div>
+                <div style="max-height:31px; margin-bottom:2px; float:left;">
+                    <ul class="pagination">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="javascript:void(0)" onclick="" >TotalCount:<b id="total_count_23">0</b></a>
+                        </li>
+                        <li class="page-item disabled">
+                            <a class="page-link" href="javascript:void(0)" onclick="" >[ <b id="current_page_23">0</b>/<b id="total_page_23">0</b> ]</a>
+                        </li>
+                        <li class="page-item" type="button">
+                            <a class="page-link " href="javascript:void(0)" onclick="previous_C_N();" id="previous_C_N">Previous</a>
+                        </li>
+
+                        <li class="page-item" type="button">
+                            <a class="page-link active" href="javascript:void(0)" onclick="next_C_N();" id="next_C_N">Next</a>
+                        </li>
+                        <li class="page-item" type="button">
+                            <select class="pagination" style="width:100%;height:38px;border-color:#dee2e6;" id="C_N_setup">
+                                <option value="10" selected>10</option>
+                                <option value="20">20</option>
+                                <option value="30">30</option>
+                                <option value="40">40</option>
+                                <option value="50">50</option>
+                            </select>
+                        </li>
+                    </ul>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped table-sm">
+                      <thead>
+                        <tr>
+                          <th>操作</th>
+                          <th>客户名称</th>
+                        </tr>
+                      </thead>
+                      <tbody id="tab_C_N">
+
+                      </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="BU yc">
+            <div class="row col-md-12 text-left" style="padding-bottom:30px;">
+                <div class="row col-md-7">
+                    <a href="#" style="padding-top:10px; padding-bottom:10px;padding-right:10px;">
+                        <span data-toggle="modal" data-target="#add-bringBU">
+                            <img alt="Add" src="{% static 'images/add.png' %}"> 添加所属BU
+                        </span>
+                    </a>
+                </div>
+                <div style="max-height:31px; margin-bottom:2px; float:left;">
+                    <ul class="pagination">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="javascript:void(0)" onclick="" >TotalCount:<b id="total_count_24">0</b></a>
+                        </li>
+                        <li class="page-item disabled">
+                            <a class="page-link" href="javascript:void(0)" onclick="" >[ <b id="current_page_24">0</b>/<b id="total_page_24">0</b> ]</a>
+                        </li>
+                        <li class="page-item" type="button">
+                            <a class="page-link " href="javascript:void(0)" onclick="previous_B_U();" id="previous_B_U">Previous</a>
+                        </li>
+
+                        <li class="page-item" type="button">
+                            <a class="page-link active" href="javascript:void(0)" onclick="next_B_U();" id="next_B_U">Next</a>
+                        </li>
+                        <li class="page-item" type="button">
+                            <select class="pagination" style="width:100%;height:38px;border-color:#dee2e6;" id="B_U_setup">
+                                <option value="10" selected>10</option>
+                                <option value="20">20</option>
+                                <option value="30">30</option>
+                                <option value="40">40</option>
+                                <option value="50">50</option>
+                            </select>
+                        </li>
+                    </ul>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped table-sm">
+                      <thead>
+                        <tr>
+                          <th>操作</th>
+                          <th>所属BU</th>
+                        </tr>
+                      </thead>
+                      <tbody id="tab_B_U">
+
+                      </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="Vendor yc">
+            <div class="row col-md-12 text-left" style="padding-bottom:30px;">
+                <div class="row col-md-7">
+                    <a href="#" style="padding-top:10px; padding-bottom:10px;padding-right:10px;">
+                        <span data-toggle="modal" data-target="#add-EquipmentVendor">
+                            <img alt="Add" src="{% static 'images/add.png' %}"> 添加治具厂商
+                        </span>
+                    </a>
+                </div>
+                <div style="max-height:31px; margin-bottom:2px; float:left;">
+                    <ul class="pagination">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="javascript:void(0)" onclick="" >TotalCount:<b id="total_count_25">0</b></a>
+                        </li>
+                        <li class="page-item disabled">
+                            <a class="page-link" href="javascript:void(0)" onclick="" >[ <b id="current_page_25">0</b>/<b id="total_page_25">0</b> ]</a>
+                        </li>
+                        <li class="page-item" type="button">
+                            <a class="page-link " href="javascript:void(0)" onclick="previous_V_N();" id="previous_V_N">Previous</a>
+                        </li>
+
+                        <li class="page-item" type="button">
+                            <a class="page-link active" href="javascript:void(0)" onclick="next_V_N();" id="next_V_N">Next</a>
+                        </li>
+                        <li class="page-item" type="button">
+                            <select class="pagination" style="width:100%;height:38px;border-color:#dee2e6;" id="V_N_setup">
+                                <option value="10" selected>10</option>
+                                <option value="20">20</option>
+                                <option value="30">30</option>
+                                <option value="40">40</option>
+                                <option value="50">50</option>
+                            </select>
+                        </li>
+                    </ul>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped table-sm">
+                      <thead>
+                        <tr>
+                          <th>操作</th>
+                          <th>治具厂商</th>
+                        </tr>
+                      </thead>
+                      <tbody id="tab_V_N">
+
+                      </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="Type yc">
+            <div class="row col-md-12 text-left" style="padding-bottom:30px;">
+                <div class="row col-md-7">
+                    <a href="#" style="padding-top:10px; padding-bottom:10px;padding-right:10px;">
+                        <span data-toggle="modal" data-target="#add-EquipmentType">
+                            <img alt="Add" src="{% static 'images/add.png' %}"> 添加治具类型
+                        </span>
+                    </a>
+                </div>
+                <div style="max-height:31px; margin-bottom:2px; float:left;">
+                    <ul class="pagination">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="javascript:void(0)" onclick="" >TotalCount:<b id="total_count_26">0</b></a>
+                        </li>
+                        <li class="page-item disabled">
+                            <a class="page-link" href="javascript:void(0)" onclick="" >[ <b id="current_page_26">0</b>/<b id="total_page_26">0</b> ]</a>
+                        </li>
+                        <li class="page-item" type="button">
+                            <a class="page-link " href="javascript:void(0)" onclick="previous_T_N();" id="previous_T_N">Previous</a>
+                        </li>
+
+                        <li class="page-item" type="button">
+                            <a class="page-link active" href="javascript:void(0)" onclick="next_T_N();" id="next_T_N">Next</a>
+                        </li>
+                        <li class="page-item" type="button">
+                            <select class="pagination" style="width:100%;height:38px;border-color:#dee2e6;" id="T_N_setup">
+                                <option value="10" selected>10</option>
+                                <option value="20">20</option>
+                                <option value="30">30</option>
+                                <option value="40">40</option>
+                                <option value="50">50</option>
+                            </select>
+                        </li>
+                    </ul>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped table-sm">
+                      <thead>
+                        <tr>
+                          <th>操作</th>
+                          <th>治具类型</th>
+                        </tr>
+                      </thead>
+                      <tbody id="tab_T_N">
+
+                      </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="Station yc">
+            <div class="row col-md-12 text-left" style="padding-bottom:30px;">
+                <div class="row col-md-7">
+                    <a href="#" style="padding-top:10px; padding-bottom:10px;padding-right:10px;">
+                        <span data-toggle="modal" data-target="#add-Stations">
+                            <img alt="Add" src="{% static 'images/add.png' %}"> 添加站别
+                        </span>
+                    </a>
+                </div>
+                <div style="max-height:31px; margin-bottom:2px; float:left;">
+                    <ul class="pagination">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="javascript:void(0)" onclick="" >TotalCount:<b id="total_count_27">0</b></a>
+                        </li>
+                        <li class="page-item disabled">
+                            <a class="page-link" href="javascript:void(0)" onclick="" >[ <b id="current_page_27">0</b>/<b id="total_page_27">0</b> ]</a>
+                        </li>
+                        <li class="page-item" type="button">
+                            <a class="page-link " href="javascript:void(0)" onclick="previous_S_N();" id="previous_S_N">Previous</a>
+                        </li>
+
+                        <li class="page-item" type="button">
+                            <a class="page-link active" href="javascript:void(0)" onclick="next_S_N();" id="next_S_N">Next</a>
+                        </li>
+                        <li class="page-item" type="button">
+                            <select class="pagination" style="width:100%;height:38px;border-color:#dee2e6;" id="S_N_setup">
+                                <option value="10" selected>10</option>
+                                <option value="20">20</option>
+                                <option value="30">30</option>
+                                <option value="40">40</option>
+                                <option value="50">50</option>
+                            </select>
+                        </li>
+                    </ul>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped table-sm">
+                      <thead>
+                        <tr>
+                          <th>操作</th>
+                          <th>站别</th>
+                        </tr>
+                      </thead>
+                      <tbody id="tab_S_N">
+
+                      </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="Question yc">
+            <div class="row col-md-12 text-left" style="padding-bottom:30px;">
+                <div class="row col-md-7">
+                    <a href="#" style="padding-top:10px; padding-bottom:10px;padding-right:10px;">
+                        <span data-toggle="modal" data-target="#add-Questions">
+                            <img alt="Add" src="{% static 'images/add.png' %}"> 添加问题点
+                        </span>
+                    </a>
+                </div>
+                <div style="max-height:31px; margin-bottom:2px; float:left;">
+                    <ul class="pagination">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="javascript:void(0)" onclick="" >TotalCount:<b id="total_count_28">0</b></a>
+                        </li>
+                        <li class="page-item disabled">
+                            <a class="page-link" href="javascript:void(0)" onclick="" >[ <b id="current_page_28">0</b>/<b id="total_page_28">0</b> ]</a>
+                        </li>
+                        <li class="page-item" type="button">
+                            <a class="page-link " href="javascript:void(0)" onclick="previous_Q_N();" id="previous_Q_N">Previous</a>
+                        </li>
+
+                        <li class="page-item" type="button">
+                            <a class="page-link active" href="javascript:void(0)" onclick="next_Q_N();" id="next_Q_N">Next</a>
+                        </li>
+                        <li class="page-item" type="button">
+                            <select class="pagination" style="width:100%;height:38px;border-color:#dee2e6;" id="Q_N_setup">
+                                <option value="10" selected>10</option>
+                                <option value="20">20</option>
+                                <option value="30">30</option>
+                                <option value="40">40</option>
+                                <option value="50">50</option>
+                            </select>
+                        </li>
+                    </ul>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped table-sm">
+                      <thead>
+                        <tr>
+                          <th>操作</th>
+                          <th>问题归类</th>
+                        </tr>
+                      </thead>
+                      <tbody id="tab_Q_N">
+
+                      </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="modal fade" id="add-Question" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+          <div class="modal-dialog" >
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">添加问题分析</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              </div>
+              <form class="form-horizontal" role="form" autocomplete="off">
+                <div class="modal-body">
+                    <div class="form-group row">
+                        <label for="input_note"  class="col-md-4 col-form-label">治具编号</label>
+                        <div class="col-md-8 has-feedback">
+                            <select class="form-control" id="E_NO" name="box">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="input_note"  class="col-md-4 col-form-label">线别</label>
+                        <div class="col-md-8 has-feedback">
+                            <select class="form-control" id="Lines" name="box">
+                                <option value="BoxIdTest"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="input_note"  class="col-md-4 col-form-label">站别</label>
+                        <div class="col-md-8 has-feedback">
+                            <select class="form-control" id="Station" name="box">
+                                <option value="BoxIdTest"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row" >
+                        <label for="input_note" class="col-md-4 col-form-label">问题描述</label>
+                        <div class="col-md-8 has-feedback">
+                            <input type="text" class="form-control input_class" id="Q_desc" >
+                        </div>
+                    </div>
+                    <div class="form-group row" >
+                        <label for="input_note" class="col-md-4 col-form-label">根本原因</label>
+                        <div class="col-md-8 has-feedback">
+                            <input type="text" class="form-control input_class" id="Q_ess" >
+                        </div>
+                    </div>
+                    <div class="form-group row" >
+                        <label for="input_note" class="col-md-4 col-form-label">解决方法</label>
+                        <div class="col-md-8 has-feedback">
+                            <input type="text" class="form-control input_class" id="R_way" >
+                        </div>
+                    </div>
+                    <div class="form-group row" >
+                        <label for="input_note" class="col-md-4 col-form-label">修复时长</label>
+                        <div class="col-md-8 has-feedback">
+                            <input type="text" class="form-control input_class" id="R_time" >
+                        </div>
+                    </div>
+                    <div class="form-group row" >
+                        <label for="input_note"  class="col-md-4 col-form-label">问题归类</label>
+                        <div class="col-md-8 has-feedback">
+                            <select class="form-control" id="Q_type" name="box">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row" >
+                        <label for="input_note" class="col-md-4 col-form-label">分析人员</label>
+                        <div class="col-md-8 has-feedback">
+                            <input type="text" class="form-control input_class" id="A_Person" >
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="input_note" class="col-md-2 col-form-label">附件</label>
+                        <div class="col-md-10 has-feedback" >
+                            <input type="file"  name="upload_file" class="form-control input_class">
+                            <span class="help-block"></span>
+                            <span class="glyphiconglyphicon-ok form-control-feedback"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row" >
+                        <label for="input_note" class="col-md-4 col-form-label">Remark</label>
+                        <div class="col-md-8 has-feedback">
+                            <input type="text" class="form-control input_class" id="R_mark" >
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary " data-dismiss="modal" onClick="add_FT();">确认</button>
+                  <button type="submit" class="btn btn-primary " data-dismiss="modal">关闭</button>
+                </div>
+              </form>
+            </div>
+          </div>
+    </div>
+
+    <div class="modal fade" id="add-Equipment-manage" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+          <div class="modal-dialog" >
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">添加治具管理</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              </div>
+              <form class="form-horizontal" role="form" autocomplete="off">
+                <div class="modal-body">
+                    <div class="form-group row">
+                        <label for="input_note"  class="col-md-4 col-form-label">治具编号</label>
+                        <div class="col-md-8 has-feedback">
+                            <select class="form-control" id="E_Number" name="box">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="input_note"  class="col-md-4 col-form-label">机种名称</label>
+                        <div class="col-md-8 has-feedback">
+                            <select class="form-control" id="FA_Pro" name="box">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="input_note"  class="col-md-4 col-form-label">客户名称</label>
+                        <div class="col-md-8 has-feedback">
+                            <select class="form-control" id="FA_Customer" name="box">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="input_note"  class="col-md-4 col-form-label">所属BU</label>
+                        <div class="col-md-8 has-feedback">
+                            <select class="form-control" id="FA_BringBU" name="box">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="input_note"  class="col-md-4 col-form-label">治具厂商</label>
+                        <div class="col-md-8 has-feedback">
+                            <select class="form-control" id="FA_EquipmentVendor" name="box">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="input_note"  class="col-md-4 col-form-label">治具类型</label>
+                        <div class="col-md-8 has-feedback">
+                            <select class="form-control" id="FA_EquipmentType" name="box">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="input_note"  class="col-md-4 col-form-label">站别</label>
+                        <div class="col-md-8 has-feedback">
+                            <select class="form-control" id="FA_Stations" name="box">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary " data-dismiss="modal" onClick="added_Equipment_manage();">确认</button>
+                  <button type="submit" class="btn btn-primary " data-dismiss="modal">关闭</button>
+                </div>
+              </form>
+            </div>
+          </div>
+    </div>
+
+    <div class="modal fade" id="add-Projects" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+          <div class="modal-dialog" >
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">添加机种名称</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              </div>
+              <form class="form-horizontal" role="form" autocomplete="off">
+                <div class="modal-body">
+
+                    <div class="form-group row" >
+                        <label for="input_note" class="col-md-4 col-form-label">机种名称</label>
+                        <div class="col-md-8 has-feedback">
+                            <input type="text" class="form-control input_class" id="P_Names" >
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary " data-dismiss="modal" onClick="added_Projects();">确认</button>
+                  <button type="submit" class="btn btn-primary " data-dismiss="modal">关闭</button>
+                </div>
+              </form>
+            </div>
+          </div>
+    </div>
+
+    <div class="modal fade" id="add-customers" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+          <div class="modal-dialog" >
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">添加客户</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              </div>
+              <form class="form-horizontal" role="form" autocomplete="off">
+                <div class="modal-body">
+
+                    <div class="form-group row" >
+                        <label for="input_note" class="col-md-4 col-form-label">客户名称</label>
+                        <div class="col-md-8 has-feedback">
+                            <input type="text" class="form-control input_class" id="Cu_Name" >
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary " data-dismiss="modal" onClick="added_Customer();">确认</button>
+                  <button type="submit" class="btn btn-primary " data-dismiss="modal">关闭</button>
+                </div>
+              </form>
+            </div>
+          </div>
+    </div>
+
+    <div class="modal fade" id="add-bringBU" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+          <div class="modal-dialog" >
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">添加所属BU</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              </div>
+              <form class="form-horizontal" role="form" autocomplete="off">
+                <div class="modal-body">
+
+                    <div class="form-group row" >
+                        <label for="input_note" class="col-md-4 col-form-label">所属BU</label>
+                        <div class="col-md-8 has-feedback">
+                            <input type="text" class="form-control input_class" id="BringBUs" >
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary " data-dismiss="modal" onClick="added_BU();">确认</button>
+                  <button type="submit" class="btn btn-primary " data-dismiss="modal">关闭</button>
+                </div>
+              </form>
+            </div>
+          </div>
+    </div>
+
+    <div class="modal fade" id="add-EquipmentVendor" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+          <div class="modal-dialog" >
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">添加治具厂商</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              </div>
+              <form class="form-horizontal" role="form" autocomplete="off">
+                <div class="modal-body">
+
+                    <div class="form-group row" >
+                        <label for="input_note" class="col-md-4 col-form-label">治具厂商</label>
+                        <div class="col-md-8 has-feedback">
+                            <input type="text" class="form-control input_class" id="E_Vendor" >
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary " data-dismiss="modal" onClick="added_Equipment_vendor();">确认</button>
+                  <button type="submit" class="btn btn-primary " data-dismiss="modal">关闭</button>
+                </div>
+              </form>
+            </div>
+          </div>
+    </div>
+
+    <div class="modal fade" id="add-EquipmentType" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+          <div class="modal-dialog" >
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">添加治具类型</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              </div>
+              <form class="form-horizontal" role="form" autocomplete="off">
+                <div class="modal-body">
+
+                    <div class="form-group row" >
+                        <label for="input_note" class="col-md-4 col-form-label">治具类型</label>
+                        <div class="col-md-8 has-feedback">
+                            <input type="text" class="form-control input_class" id="E_type" >
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary " data-dismiss="modal" onClick="added_E_type();">确认</button>
+                  <button type="submit" class="btn btn-primary " data-dismiss="modal">关闭</button>
+                </div>
+              </form>
+            </div>
+          </div>
+    </div>
+
+    <div class="modal fade" id="add-Stations" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+          <div class="modal-dialog" >
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">添加站别</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              </div>
+              <form class="form-horizontal" role="form" autocomplete="off">
+                <div class="modal-body">
+
+                    <div class="form-group row" >
+                        <label for="input_note" class="col-md-4 col-form-label">站别</label>
+                        <div class="col-md-8 has-feedback">
+                            <input type="text" class="form-control input_class" id="S_type" >
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary " data-dismiss="modal" onClick="added_Station();">确认</button>
+                  <button type="submit" class="btn btn-primary " data-dismiss="modal">关闭</button>
+                </div>
+              </form>
+            </div>
+          </div>
+    </div>
+
+    <div class="modal fade" id="add-Questions" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+          <div class="modal-dialog" >
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">添加问题归类</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              </div>
+              <form class="form-horizontal" role="form" autocomplete="off">
+                <div class="modal-body">
+
+                    <div class="form-group row" >
+                        <label for="input_note" class="col-md-4 col-form-label">问题归类</label>
+                        <div class="col-md-8 has-feedback">
+                            <input type="text" class="form-control input_class" id="Q_T" >
+                        </div>
+                    </div>
+
+
+
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary " data-dismiss="modal" onClick="added_Q_T();">确认</button>
+                  <button type="submit" class="btn btn-primary " data-dismiss="modal">关闭</button>
+                </div>
+              </form>
+            </div>
+          </div>
+    </div>
+
+
+</div>
