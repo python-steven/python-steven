@@ -1,0 +1,104 @@
+
+.content{
+		width:100%;
+		background:#fbf9fe;
+}
+.cell-item-border{
+		width:100%;
+		border: 1rpx solid #C8C7CC;
+		background-color: #ffffff;
+		margin-bottom: 40rpx;
+}
+.input-item{
+		height:80rpx;
+}
+.cell-top{
+		padding-top: 5rpx;
+}
+.margin-t{
+		margin-top:60rpx;
+}
+.cell-b{
+		border-bottom:1rpx solid #C8C7CC;
+}
+.cell-left{
+		padding-left:10rpx;
+}
+.btn{
+	  display: inline-block;
+	  -webkit-box-sizing: border-box;
+	          box-sizing: border-box;
+	  border-radius: 0;
+	  font-size: 36rpx;
+	  -webkit-transform: scale(1);
+	      -ms-transform: scale(1);
+	          transform: scale(1);
+	  -webkit-transition: all .5s;
+	  -o-transition: all .5s;
+	  transition: all .5s;
+}
+.btn-m{
+		margin: 40rpx 10rpx 0 10rpx;
+}
+.action-row {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: row;
+            -ms-flex-direction: row;
+                flex-direction: row;
+        -webkit-box-pack: center;
+        -webkit-justify-content: center;
+            -ms-flex-pack: center;
+                justify-content: center;
+}
+.action-row navigator {
+        color: #007aff;
+        padding: 0 20rpx;
+}
+.oauth-row {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: row;
+            -ms-flex-direction: row;
+                flex-direction: row;
+        -webkit-box-pack: center;
+        -webkit-justify-content: center;
+            -ms-flex-pack: center;
+                justify-content: center;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+}
+.oauth-image {
+        width: 100rpx;
+        height: 100rpx;
+        border: 1rpx solid #dddddd;
+        border-radius: 100rpx;
+        margin: 0 40rpx;
+        background-color: #ffffff;
+}
+.oauth-image image {
+        width: 60rpx;
+        height: 60rpx;
+        margin: 20rpx;
+}
+.logo {
+		width: 290rpx;
+		height: 80rpx;
+		border-radius: 20rpx;
+}
+.app-name {
+		font-size: 32rpx;
+		color: #999;
+		margin-bottom: 60rpx;
+}
+

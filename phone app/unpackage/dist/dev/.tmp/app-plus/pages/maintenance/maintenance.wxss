@@ -1,0 +1,44 @@
+
+.content{
+	height:100%;
+	width:100%;
+	background-color: #FFFFFF;
+}
+.hd-title{
+	margin-top:20rpx; 
+	margin-left:10rpx;
+	font-size: 26rpx;
+}
+.mdate-padding{
+	padding-left:8%;
+}
+.cell-hd-title{
+	margin:18rpx 0; 
+	margin-left:10rpx;
+	font-size: 26rpx;
+}
+.operator-padding{
+	padding-left:11.5%;
+}
+.status-padding{
+	padding-left:8.5%;
+}
+.beizhu-padding{
+	padding-left:15%;
+}
+.cart-bottom {
+	
+	
+	bottom: 0;
+	
+	z-index: 99;
+	height: 90rpx;
+	width: 100%;
+	/* background-color: #fff; */
+	position: fixed;
+	
+	overflow: hidden;
+	left:0;
+	/* box-shadow: 0 0 20upx #ccc; */
+}
+

@@ -1,0 +1,57 @@
+{
+  "pages": [
+    "pages/login/login",
+    "pages/login/index",
+    "pages/list/index",
+    "pages/choose/index",
+    "pages/maintenance/index",
+    "pages/choose/maintain_filter",
+    "pages/maintenance_List/index",
+    "pages/choose/record",
+    "pages/maintenance/maintenance"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "white",
+    "navigationBarBackgroundColor": "#10B2AA",
+    "backgroundColor": "#fbf9fe"
+  },
+  "tabBar": {
+    "color": "#7a7e83",
+    "selectedColor": "#333",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/login/index",
+        "text": "我的",
+        "iconPath": "static/img/user.png",
+        "selectedIconPath": "static/img/userHL.png"
+      },
+      {
+        "pagePath": "pages/list/index",
+        "text": "设备列表",
+        "iconPath": "static/img/user.png",
+        "selectedIconPath": "static/img/userHL.png"
+      },
+      {
+        "pagePath": "pages/maintenance/index",
+        "text": "设备保养",
+        "iconPath": "static/img/user.png",
+        "selectedIconPath": "static/img/userHL.png"
+      },
+      {
+        "pagePath": "pages/maintenance_List/index",
+        "text": "保养记录",
+        "iconPath": "static/img/home.png",
+        "selectedIconPath": "static/img/homeHL.png"
+      }
+    ]
+  },
+  "splashscreen": {
+    "alwaysShowBeforeRender": true,
+    "autoclose": false
+  },
+  "appname": "AEMS_Lite",
+  "compilerVersion": "1.9.9",
+  "usingComponents": {}
+}

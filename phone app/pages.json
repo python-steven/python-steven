@@ -1,0 +1,114 @@
+{
+    "pages": [ //pages数组中第一项表示应用启动页,
+        {
+            "path": "pages/login/login",
+            "style": {
+                "navigationBarTitleText": "登录"
+            }
+        }, {
+			"path": "pages/login/index",
+			"style": {
+				"navigationBarTitleText": "个人中心"
+			}
+        }, {
+            "path": "pages/list/index",
+            "style": {
+                "navigationBarTitleText": "设备列表",
+				"app-plus" : {  
+					"titleNView" : {  
+						"buttons" : [  
+							{  
+								"text" : "筛选",  
+								"float":"right",
+								"fontSize": "14"
+							}
+						]
+					}
+				}
+            }
+        }, {
+            "path": "pages/choose/index",
+            "style": {
+                "navigationBarTitleText": "choose"
+            }
+		 }, {
+			"path": "pages/maintenance/index",
+			"style": {
+				"navigationBarTitleText": "设备保养",
+				"app-plus" : {  
+					"titleNView" : {  
+						"buttons" : [  
+							{  
+								"text" : "筛选",  
+								"float":"right",
+								"fontSize": "14"
+							}
+						]
+					}
+				}
+			}
+        },{
+			"path": "pages/choose/maintain_filter",
+			"style": {
+			    "navigationBarTitleText": "设备保养"
+			}
+		},{
+			"path": "pages/maintenance_List/index",
+			"style": {
+			    "navigationBarTitleText": "保养记录",
+				"app-plus" : {  
+					"titleNView" : {  
+						"buttons" : [  
+							{  
+								"text" : "筛选",  
+								"float":"right",
+								"fontSize": "14"
+							}
+						]
+					}
+				}
+			}
+		},{
+			"path": "pages/choose/record",
+			"style": {
+				"navigationBarTitleText": "设备记录"
+			}
+		},{
+			"path": "pages/maintenance/maintenance",
+			"style": {
+				"navigationBarTitleText": "设备保养"
+			}
+		}
+    ],
+    "tabBar": {
+        "color": "#7a7e83",
+        "selectedColor": "#333",
+        "backgroundColor": "#ffffff",
+        "list": [{
+            "pagePath": "pages/login/index",
+            "text": "我的",
+            "iconPath": "static/img/user.png",
+            "selectedIconPath": "static/img/userHL.png"
+        }, {
+            "pagePath": "pages/list/index",
+            "text": "设备列表",
+            "iconPath": "static/img/user.png",
+            "selectedIconPath": "static/img/userHL.png"
+        }, {
+            "pagePath": "pages/maintenance/index",
+            "text": "设备保养",
+            "iconPath": "static/img/user.png",
+            "selectedIconPath": "static/img/userHL.png"
+		}, {
+			"pagePath": "pages/maintenance_List/index",
+			"text": "保养记录",
+			"iconPath": "static/img/home.png",
+			"selectedIconPath": "static/img/homeHL.png"
+        }]
+    },
+    "globalStyle": {
+        "navigationBarTextStyle": "white",
+        "navigationBarBackgroundColor": "#10B2AA",
+        "backgroundColor": "#fbf9fe"
+    }
+}

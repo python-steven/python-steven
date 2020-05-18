@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+    <head>
+        <meta charset="UTF-8" />
+        <script>
+            var coverSupport = 'CSS' in window && typeof CSS.supports === 'function' && (CSS.supports('top: env(a)') ||
+                CSS.supports('top: constant(a)'))
+            document.write(
+                '<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0' +
+                (coverSupport ? ', viewport-fit=cover' : '') + '" />')
+        </script>
+        <title>View</title>
+        <style>
+            * {
+                -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+                -webkit-tap-highlight-color: transparent;
+            }
+
+            input[type="search"i]::-webkit-search-cancel-button {
+                display: none;
+            }
+        </style>
+        <script>
+            var __wxConfig = {"debug":false,"appname":"AEMS_Lite","entryPagePath":"pages/login/login.html","page":{"pages/login/login.html":{"window":{"navigationBarTitleText":"登录","usingComponents":{"m-input":"/components/m-input"}}},"pages/login/index.html":{"window":{"navigationBarTitleText":"个人中心","usingComponents":{}}},"pages/list/index.html":{"window":{"navigationBarTitleText":"设备列表","titleNView":{"buttons":[{"text":"筛选","float":"right","fontSize":"14"}]},"usingComponents":{"uni-segmented-control":"/components/uni-segmented-control/uni-segmented-control"}}},"pages/choose/index.html":{"window":{"navigationBarTitleText":"choose","usingComponents":{"lvv-popup":"/components/lvv-popup/lvv-popup"}}},"pages/maintenance/index.html":{"window":{"navigationBarTitleText":"设备保养","titleNView":{"buttons":[{"text":"筛选","float":"right","fontSize":"14"}]},"usingComponents":{"lvv-popup":"/components/lvv-popup/lvv-popup"}}},"pages/choose/maintain_filter.html":{"window":{"navigationBarTitleText":"设备保养","usingComponents":{}}},"pages/maintenance_List/index.html":{"window":{"navigationBarTitleText":"保养记录","titleNView":{"buttons":[{"text":"筛选","float":"right","fontSize":"14"}]},"usingComponents":{}}},"pages/choose/record.html":{"window":{"navigationBarTitleText":"设备记录","usingComponents":{}}},"pages/maintenance/maintenance.html":{"window":{"navigationBarTitleText":"设备保养","usingComponents":{}}}},"global":{"window":{"navigationBarTextStyle":"white","navigationBarBackgroundColor":"#10B2AA","backgroundColor":"#fbf9fe"}},"tabBar":{"color":"#7a7e83","selectedColor":"#333","backgroundColor":"#ffffff","borderStyle":"black","list":[{"pagePath":"pages/login/index.html","text":"我的","iconPath":"static/img/user.png","selectedIconPath":"static/img/userHL.png"},{"pagePath":"pages/list/index.html","text":"设备列表","iconPath":"static/img/user.png","selectedIconPath":"static/img/userHL.png"},{"pagePath":"pages/maintenance/index.html","text":"设备保养","iconPath":"static/img/user.png","selectedIconPath":"static/img/userHL.png"},{"pagePath":"pages/maintenance_List/index.html","text":"保养记录","iconPath":"static/img/home.png","selectedIconPath":"static/img/homeHL.png"}],"position":"bottom"},"networkTimeout":{"request":60000,"connectSocket":60000,"uploadFile":60000,"downloadFile":60000},"platform":"devtools","pages":["pages/login/login","pages/login/index","pages/list/index","pages/choose/index","pages/maintenance/index","pages/choose/maintain_filter","pages/maintenance_List/index","pages/choose/record","pages/maintenance/maintenance"],"subPackages":[],"splashscreen":{"alwaysShowBeforeRender":true,"autoclose":false},"compilerVersion":"1.9.9","usingComponents":{}}
+        </script>
+        <script>
+            var __id__ = '';
+            window.__dispatchGenerateFunc__ = function(page) {
+                __id__ = page;
+                document.title = page;
+                // window.history.pushState('', '', page);
+                var wxss = page.replace('.html', '.wxss')
+                if (
+                    typeof __wxAppCode__ !== 'undefined' &&
+                    __wxAppCode__.hasOwnProperty(wxss)
+                ) {
+                    var setCssToHead = __wxAppCode__[wxss]
+                    typeof setCssToHead === 'function' && setCssToHead()
+                    document.dispatchEvent(new CustomEvent("generateFuncReady", {
+                        detail: {
+                            generateFunc: $gwx(page.replace('.html', '.wxml'))
+                        }
+                    }));
+                } else {
+                    plus.webview.currentWebview().setJsFile('_www/' + page.replace('.html', '.js'));
+                }
+            };
+        </script>
+        <script src="__uniappes6.js"></script>
+        <script src="uniapp://ready"></script>
+    </head>
+
+    <body>
+        <div></div>
+    </body>
+
+</html>

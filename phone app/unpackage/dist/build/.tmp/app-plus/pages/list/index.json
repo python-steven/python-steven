@@ -1,0 +1,15 @@
+{
+  "navigationBarTitleText": "设备列表",
+  "titleNView": {
+    "buttons": [
+      {
+        "text": "筛选",
+        "float": "right",
+        "fontSize": "14"
+      }
+    ]
+  },
+  "usingComponents": {
+    "uni-segmented-control": "/components/uni-segmented-control/uni-segmented-control"
+  }
+}

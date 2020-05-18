@@ -1,0 +1,15 @@
+{
+  "navigationBarTitleText": "设备保养",
+  "titleNView": {
+    "buttons": [
+      {
+        "text": "筛选",
+        "float": "right",
+        "fontSize": "14"
+      }
+    ]
+  },
+  "usingComponents": {
+    "lvv-popup": "/components/lvv-popup/lvv-popup"
+  }
+}

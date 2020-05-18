@@ -1,0 +1,48 @@
+
+.content{
+	height:100%;
+	width:100%;
+}
+.cell-group{
+  background-color: #fff;
+}
+.cell-left-title{
+	margin:18rpx 0; 
+	margin-left:5rpx;
+	font-size: 26rpx;
+}
+.cell-padding{
+	padding-left:15%;
+}
+.cell-sn-space{
+	padding-left:23%;
+}
+.cell-pm-space{
+	padding-left:21%;
+}
+.cell-maintainer-space{
+	padding-left:17.5%;
+}
+.cart-bottom {
+	
+	
+	bottom: 0;
+	
+	z-index: 99;
+	height: 90rpx;
+	width: 100%;
+	/* background-color: #fff; */
+	position: fixed;
+	
+	overflow: hidden;
+	left:0;
+	/* box-shadow: 0 0 20upx #ccc; */
+}
+.icon{
+  padding-top: 18rpx;
+  padding-left:8%;
+  width: 50rpx;
+  height: 50rpx;
+
+}
+

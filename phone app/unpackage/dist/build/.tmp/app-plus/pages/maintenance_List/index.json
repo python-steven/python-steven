@@ -1,0 +1,13 @@
+{
+  "navigationBarTitleText": "保养记录",
+  "titleNView": {
+    "buttons": [
+      {
+        "text": "筛选",
+        "float": "right",
+        "fontSize": "14"
+      }
+    ]
+  },
+  "usingComponents": {}
+}

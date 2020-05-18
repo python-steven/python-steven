@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "choose",
+  "usingComponents": {
+    "lvv-popup": "/components/lvv-popup/lvv-popup"
+  }
+}

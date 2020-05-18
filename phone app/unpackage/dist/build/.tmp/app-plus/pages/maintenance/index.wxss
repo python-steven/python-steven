@@ -1,0 +1,136 @@
+
+.content{
+	height:100%;
+	width:100%;
+	background-color: #FFFFFF;
+}
+.cart-none{
+	height:100%;
+	width:100%;
+	background-color: #FFFFFF;
+	padding: 200rpx 0;
+}
+.cart-none-img{
+	width: 252rpx;
+	height: 228rpx;
+	margin-bottom: 40rpx;
+}
+.cart-none-t{
+	color: #666;
+	font-size: 28rpx;
+}
+.cart-none-m{
+	color: #666;
+	font-size: 28rpx;
+	margin-bottom: 40rpx;
+}
+.cart-bottom {
+	
+	
+	bottom: 0;
+	
+	z-index: 99;
+	height: 90rpx;
+	width: 100%;
+	background-color: #fff;
+	position: fixed;
+	
+	overflow: hidden;
+	/* box-shadow: 0 0 20upx #ccc; */
+}
+.cart-bottom .cart-checkbox-c {
+	color: #333;
+	font-size: 30rpx;
+}
+.cart-checkbox{
+	position: relative;
+	height: 100%;
+}
+.cart-checkbox-c{
+	display: inline-block;
+	position: absolute;
+	top: 50%;
+	left: 26rpx;
+	-webkit-transform: translateY(-50%);
+	    -ms-transform: translateY(-50%);
+	        transform: translateY(-50%);
+	z-index: 99;
+}
+.cart-bottom-right {
+	height: 90rpx;
+	float: right;
+	overflow: hidden;
+}
+.pop-b{
+	margin-bottom: 90rpx;
+}
+.cell-hd-title{
+	margin:18rpx 0; 
+	margin-left:10rpx;
+	font-size: 26rpx;
+}
+.close-padding{
+	margin:18rpx 0;
+}
+.hd-title{
+	margin-top:20rpx; 
+	margin-left:10rpx;
+	font-size: 26rpx;
+}
+.mdate-padding{
+	padding-left:8%;
+}
+.p-padding{
+	padding-left:11.5%;
+}
+.status-padding{
+	padding-left:8.5%;
+}
+.beizhu-padding{
+	padding-left:15%;
+}
+.img-list-item{ 
+	width:100%;
+	margin: 10rpx 2rpx;
+	border-radius: 10rpx;
+	-webkit-box-shadow: 2px 2px 5px #000000;
+	        box-shadow: 2px 2px 5px #000000;
+}
+.item-p{
+	padding: 3rpx 10rpx 3rpx 10rpx;
+}
+.pop-t{
+	position: relative;
+	padding:30rpx 26rpx;
+	/* border-bottom:2upx solid #f3f3f3; */
+	/* box-shadow: 0 0 20upx #ccc; */
+}
+.pop-c{
+	width:100%;
+}
+.icon{
+  width: 40rpx;
+  height: 40rpx;
+
+}
+.status-border-green{
+	border: 2rpx solid #28a745;
+	background:#28a745;
+	color:#FFFFFF;
+}
+.status-border-yellow{
+	border: 2rpx solid #FFFF00;
+	background:#FFFF00;
+	color:#000;
+}
+.status-border-red{
+	border: 2rpx solid #FF0000;
+	background:#FF0000;
+	color:#FFFFFF;
+}
+.status-border-info{
+	border: 2rpx solid #17a2b8;
+	background:#17a2b8;
+	color:#FFFFFF;
+}
+

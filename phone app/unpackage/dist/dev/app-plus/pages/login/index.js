@@ -1,0 +1,2 @@
+setCssToHead([".",[1],"content{ background:#FFFFFF; height:100%; width:100%; }\n.",[1],"choose-c{ width: 80%; margin-left: 10%; top: 5%; }\n.",[1],"cell-m{ padding: ",[0,25]," 0; }\n.",[1],"icon{ width: ",[0,50],"; height: ",[0,50],"; }\n",],undefined,{path:"./pages/login/index.wxss"})();
+document.dispatchEvent(new CustomEvent("generateFuncReady", { detail: { generateFunc: $gwx('./pages/login/index.wxml') } }));
