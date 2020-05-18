@@ -50,7 +50,7 @@ class EquipmentVendor(models.Model):
 #治具类型
 class EquipmentType(models.Model):
     Id = models.BigAutoField(primary_key=True)
-    Type = models.CharField(max_length=80,null=False)                               # 治具类型
+    Type = models.CharField(max_length=50,null=False)                               # 治具类型
     CreateTime = models.DateTimeField(auto_now_add=True,blank=True)                  # 创建时间
     UpdatedTime = models.DateTimeField(null=True,blank=True)                         # 更新时间
     class Meta:
@@ -72,7 +72,7 @@ class Station(models.Model):
 #问题归类
 class QuestionClass(models.Model):
     Id = models.BigAutoField(primary_key=True)
-    Classify = models.CharField(max_length=100,null=False)                           # 问题归类
+    Classify = models.CharField(max_length=50,null=False)                           # 问题归类
     CreateTime = models.DateTimeField(auto_now_add=True,blank=True)                  # 创建时间
     UpdatedTime = models.DateTimeField(null=True,blank=True)                         # 更新时间
     class Meta:
@@ -87,7 +87,7 @@ class QuestionClass(models.Model):
 #Equipment Number
 class EquipmentNumber(models.Model):
     Id = models.BigAutoField(primary_key=True)                                       # Id
-    EquipmentNo = models.CharField(max_length=200, null=False)                       # 治具编号
+    EquipmentNo = models.CharField(max_length=50, null=False)                        # 治具编号
     ProjectName = models.CharField(max_length=50, null=True,blank=True)              # 机种名称
     Customer = models.CharField(max_length=50, null=True,blank=True)                 # 客户名称
     BringToBU = models.CharField(max_length=50, null=True,blank=True)                # 所属BU
@@ -108,15 +108,17 @@ class EquipmentNumber(models.Model):
 #FA analysis
 class FAMode(models.Model):
     Id = models.BigAutoField(primary_key=True)                                       # Id
-    EquipmentNo = models.CharField(max_length=200, null=False)                       # 治具编号
+    EquipmentNo = models.CharField(max_length=50, null=False)                        # 治具编号
     Line = models.CharField(max_length=50,null=True,blank=True)                      # 线别
     StationLine = models.CharField(max_length=50, null=True,blank=True)              # 站别
-    QuestionDesc = models.CharField(max_length=800, null=True,blank=True)            # 问题描述
-    EssentialIssues = models.CharField(max_length=300,null=True,blank=True)          # 根本原因
+    QuestionDesc = models.CharField(max_length=500, null=True,blank=True)            # 问题描述
+    EssentialIssues = models.CharField(max_length=500,null=True,blank=True)          # 根本原因
+    Solution = models.CharField(max_length=500,null=True,blank=True)                 # 解决方法
     RepairTime = models.IntegerField(default=0,null=True,blank=True)                 # 修复时长以分钟计算
     QuestionClassify = models.CharField(max_length=50,null=True,blank=True)          # 问题归类
+    QuestionDate = models.DateTimeField(null=True,blank=True)
     Analyst = models.CharField(max_length=50, null=True,blank=True)                  # 分析员
-    AttachmentPath = models.CharField(max_length=200,null=True)                      # 分析报告存放的路径
+    AttachmentPath = models.CharField(max_length=500,null=True)                      # 分析报告存放的路径
     Remark = models.CharField(max_length=200, null=True, blank=True)                 # 备注信息
 
     CreateTime = models.DateTimeField(auto_now_add=True)                             # 创建时间

@@ -54,6 +54,8 @@ function budget(){
     $(".statistic").addClass("yc")
     $(".modifypwd").addClass("yc")
     $(".main_monitor").addClass("yc")
+    $(".box").addClass("yc")
+    $(".FA").addClass("yc")
     page_obj = {'page':'1','num':'10'}
     budget_ajax();
 }

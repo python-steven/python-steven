@@ -30,6 +30,10 @@ $(function() {
     $("#mo_next_time").datepicker({ });
     $("#equipmentToFactoryDate").datepicker({ });
     $("#toFactoryDate").datepicker({ });
+    $("#Question_Date").datepicker({ });
+    $("#M_Question_Date").datepicker({ });
+    $("#Q_start_Q_time").datepicker({ });
+    $("#Q_end_Q_time").datepicker({ });
 });
 
 var li_index

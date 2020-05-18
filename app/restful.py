@@ -9,7 +9,7 @@ class Httpcode:
     un_auth_error = 403
     method_error = 405
     server_error = 500
-
+#class JsonResponse(data, encoder=DjangoJSONEncoder, safe=True, json_dumps_params=None,**kwargs)
 def result(code=Httpcode.ok,message='',data='',kwargs=None):
     json_dict = {'code':code,'message':message,'data':data}
     if kwargs and isinstance(kwargs,dict) and kwargs.key():

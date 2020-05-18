@@ -46,9 +46,13 @@
             <div class="row col-md-12 text-left" style="padding-bottom:30px;">
                 <div class="row col-md-7">
                     <a href="#" style="padding-top:10px; padding-bottom:10px;padding-right:10px;">
-                        <span data-toggle="modal" data-target="#add-Question">
+                        <span data-toggle="modal" data-target="#add-Question" onclick="getFT_info();">
                             <img alt="Add" src="{% static 'images/add.png' %}"> 添加问题分析
                         </span>
+                    </a>
+                    <a href="#" style="padding-top:10px; padding-bottom:10px;padding-right:10px;" data-toggle="modal" data-target="#query_Q" onclick="query_get();">
+                        <img alt="Alt" src="/static/images/filter.png"> 筛选
+
                     </a>
                 </div>
                 <div style="max-height:31px; margin-bottom:2px; float:left;">
@@ -77,14 +81,15 @@
                         </li>
                     </ul>
                 </div>
-                <div class="table-responsive">
-                    <table class="table table-striped table-sm">
+                <div style="overflow-x:auto">
+                    <table class="table table-striped table-sm text-center" style="min-width:1960px">
                       <thead>
                         <tr>
                           <th>操作</th>
                           <th>日期</th>
                           <th>治具编号</th>
-                          <th>客户</th>
+                          <th>机种名称</th>
+
                           <th>线别</th>
                           <th>站别</th>
                           <th>问题描述</th>
@@ -95,11 +100,11 @@
                           <th>分析人员</th>
                           <th>附件</th>
                           <th>Remark</th>
-                          <th>机种名称</th>
                           <th>客户名称</th>
                           <th>所属BU</th>
                           <th>治具厂商</th>
                           <th>治具类型</th>
+
                         </tr>
                       </thead>
                       <tbody id="tab_Q_E">
@@ -114,7 +119,7 @@
             <div class="row col-md-12 text-left" style="padding-bottom:30px;">
                 <div class="row col-md-7">
                     <a href="#" style="padding-top:10px; padding-bottom:10px;padding-right:10px;">
-                        <span data-toggle="modal" data-target="#add-Equipment-manage">
+                        <span data-toggle="modal" data-target="#add-Equipment-manage" onclick="GetInfo();">
                             <img alt="Add" src="{% static 'images/add.png' %}"> 添加治具管理
                         </span>
                     </a>
@@ -525,77 +530,108 @@
         </div>
     </main>
 
-    <div class="modal fade" id="add-Question" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
-          <div class="modal-dialog" >
+    <div class="modal fade" id="add-Question" tabindex="-1" role="dialog" aria-labelledby data-backdrop="static"  style="">
+          <div class="modal-dialog modal-lg" >
             <div class="modal-content">
               <div class="modal-header">
                 <h4 class="modal-title">添加问题分析</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
               </div>
-              <form class="form-horizontal" role="form" autocomplete="off">
+              <form class="form-horizontal" role="form" id="FT_record" autocomplete="off">
                 <div class="modal-body">
-                    <div class="form-group row">
-                        <label for="input_note"  class="col-md-4 col-form-label">治具编号</label>
-                        <div class="col-md-8 has-feedback">
-                            <select class="form-control" id="E_NO" name="box">
-                                <option value=""></option>
-                            </select>
+                    <div class="row clearfix">
+                        <div class="col-md-3 column card" style="padding-left:0px;padding-right:0px">
+                            <div class="card-header">
+                                <span>治具编号</span>
+                            </div>
+                            <div class="card-body" style="padding:0px">
+                                <select class="form-control" id="E_NO" name="E_NO">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3 column card" style="padding-left:0px;padding-right:0px">
+                            <div class="card-header">
+                                <span>线别</span>
+                            </div>
+                            <div class="card-body" style="padding:0px">
+                                <select class="form-control" id="Lines" name="line">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3 column card" style="padding-left:0px;padding-right:0px">
+                            <div class="card-header">
+                                <span>站别</span>
+                            </div>
+                            <div class="card-body" style="padding:0px">
+                                <select class="form-control" id="Station" name="Station">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3 column card" style="padding-left:0px;padding-right:0px">
+                            <div class="card-header">
+                                <span>问题归类</span>
+                            </div>
+                            <div class="card-body" style="padding:0px">
+                                <select class="form-control" id="Q_type" name="box">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row clearfix">
+                        <div class="col-md-4 column card" style="padding-left:0px;padding-right:0px">
+                            <div class="card-header text-center" >
+                                <span>日期</span>
+                            </div>
+                            <div class="card-body" style="padding:0px">
+                                <input type="text" class="form-control" id="Question_Date">
+                            </div>
+                        </div>
+                        <div class="col-md-4 column card" style="padding-left:0px;padding-right:0px">
+                            <div class="card-header">
+                                <span>修复时长</span>
+                            </div>
+                            <div class="card-body" style="padding:0px">
+                                <input type="text" class="form-control input_class" id="R_time" >
+                            </div>
+                        </div>
+                        <div class="col-md-4 column card" style="padding-left:0px;padding-right:0px">
+                            <div class="card-header">
+                                <span>分析人员</span>
+                            </div>
+                            <div class="card-body" style="padding:0px">
+                                <input type="text" class="form-control input_class" id="A_Person" >
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group row">
-                        <label for="input_note"  class="col-md-4 col-form-label">线别</label>
-                        <div class="col-md-8 has-feedback">
-                            <select class="form-control" id="Lines" name="box">
-                                <option value="BoxIdTest"></option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="input_note"  class="col-md-4 col-form-label">站别</label>
-                        <div class="col-md-8 has-feedback">
-                            <select class="form-control" id="Station" name="box">
-                                <option value="BoxIdTest"></option>
-                            </select>
+
+
+
+                    <div class="form-group row" >
+                        <label for="input_question" class="col-md-2 col-form-label">问题描述:</label>
+                        <div class="col-md-10 has-feedback">
+                            <textarea rows="3" class="form-control" name="Q_desc"  id="Q_desc" ></textarea>
                         </div>
                     </div>
                     <div class="form-group row" >
-                        <label for="input_note" class="col-md-4 col-form-label">问题描述</label>
-                        <div class="col-md-8 has-feedback">
-                            <input type="text" class="form-control input_class" id="Q_desc" >
+                        <label for="input_note" class="col-md-2 col-form-label">根本原因:</label>
+                        <div class="col-md-10 has-feedback">
+                            <textarea rows="3" class="form-control" name="Q_ess"  id="Q_ess" ></textarea>
                         </div>
                     </div>
                     <div class="form-group row" >
-                        <label for="input_note" class="col-md-4 col-form-label">根本原因</label>
-                        <div class="col-md-8 has-feedback">
-                            <input type="text" class="form-control input_class" id="Q_ess" >
+                        <label for="input_note" class="col-md-2 col-form-label">解决方法:</label>
+                        <div class="col-md-10 has-feedback">
+                            <textarea rows="3" class="form-control" name="R_way"  id="R_way" ></textarea>
                         </div>
                     </div>
-                    <div class="form-group row" >
-                        <label for="input_note" class="col-md-4 col-form-label">解决方法</label>
-                        <div class="col-md-8 has-feedback">
-                            <input type="text" class="form-control input_class" id="R_way" >
-                        </div>
-                    </div>
-                    <div class="form-group row" >
-                        <label for="input_note" class="col-md-4 col-form-label">修复时长</label>
-                        <div class="col-md-8 has-feedback">
-                            <input type="text" class="form-control input_class" id="R_time" >
-                        </div>
-                    </div>
-                    <div class="form-group row" >
-                        <label for="input_note"  class="col-md-4 col-form-label">问题归类</label>
-                        <div class="col-md-8 has-feedback">
-                            <select class="form-control" id="Q_type" name="box">
-                                <option value=""></option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group row" >
-                        <label for="input_note" class="col-md-4 col-form-label">分析人员</label>
-                        <div class="col-md-8 has-feedback">
-                            <input type="text" class="form-control input_class" id="A_Person" >
-                        </div>
-                    </div>
+
+
+
                     <div class="form-group row">
                         <label for="input_note" class="col-md-2 col-form-label">附件</label>
                         <div class="col-md-10 has-feedback" >
@@ -605,8 +641,8 @@
                         </div>
                     </div>
                     <div class="form-group row" >
-                        <label for="input_note" class="col-md-4 col-form-label">Remark</label>
-                        <div class="col-md-8 has-feedback">
+                        <label for="input_note" class="col-md-2 col-form-label">Remark</label>
+                        <div class="col-md-10 has-feedback">
                             <input type="text" class="form-control input_class" id="R_mark" >
                         </div>
                     </div>
@@ -622,7 +658,167 @@
           </div>
     </div>
 
-    <div class="modal fade" id="add-Equipment-manage" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+    <div class="modal" id="delete-F-T" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+      <div class="modal-dialog" >
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">是否删除该问题分析</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          </div>
+          <form class="form-horizontal" role="form" autocomplete="off" id="my_delete_FT">
+            <div class="modal-body">
+
+                <div class="form-group row yc" >
+                    <div class="col-md-8 has-feedback" >
+                        <input type="text" class="form-control input_class" id="DelFTId">
+                        <span class="help-block"></span>
+                        <span class="glyphiconglyphicon-ok form-control-feedback"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary " data-dismiss="modal" onclick="delete_F_T_1();">确定</button>
+              <button type="submit" class="btn btn-primary " data-dismiss="modal">取消</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="modify-F-T" tabindex="-1" role="dialog" aria-labelledby data-backdrop="static"  style="">
+          <div class="modal-dialog modal-lg" >
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">修改问题分析</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              </div>
+              <form class="form-horizontal" role="form" id="FT_modify" autocomplete="off">
+                <div class="modal-body">
+                    <div class="form-group row" >
+                        <div class="col-md-10 has-feedback">
+                            <input type="text" class="form-control input_class yc" id="M_Id" >
+                        </div>
+                    </div>
+                    <div class="row clearfix">
+                        <div class="col-md-3 column card" style="padding-left:0px;padding-right:0px">
+                            <div class="card-header">
+                                <span>治具编号</span>
+                            </div>
+                            <div class="card-body" style="padding:0px">
+                                <select class="form-control" id="M_E_NO" name="E_NO">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3 column card" style="padding-left:0px;padding-right:0px">
+                            <div class="card-header">
+                                <span>线别</span>
+                            </div>
+                            <div class="card-body" style="padding:0px">
+                                <select class="form-control" id="M_Lines" name="line">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3 column card" style="padding-left:0px;padding-right:0px">
+                            <div class="card-header">
+                                <span>站别</span>
+                            </div>
+                            <div class="card-body" style="padding:0px">
+                                <select class="form-control" id="M_Station" name="Station">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3 column card" style="padding-left:0px;padding-right:0px">
+                            <div class="card-header">
+                                <span>问题归类</span>
+                            </div>
+                            <div class="card-body" style="padding:0px">
+                                <select class="form-control" id="M_Q_type" name="box">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row clearfix">
+                        <div class="col-md-4 column card" style="padding-left:0px;padding-right:0px">
+                            <div class="card-header text-center" >
+                                <span>日期</span>
+                            </div>
+                            <div class="card-body" style="padding:0px">
+                                <input type="text" class="form-control" id="M_Question_Date">
+                            </div>
+                        </div>
+                        <div class="col-md-4 column card" style="padding-left:0px;padding-right:0px">
+                            <div class="card-header">
+                                <span>修复时长</span>
+                            </div>
+                            <div class="card-body" style="padding:0px">
+                                <input type="text" class="form-control input_class" id="M_R_time" >
+                            </div>
+                        </div>
+                        <div class="col-md-4 column card" style="padding-left:0px;padding-right:0px">
+                            <div class="card-header">
+                                <span>分析人员</span>
+                            </div>
+                            <div class="card-body" style="padding:0px">
+                                <input type="text" class="form-control input_class" id="M_A_Person" >
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group row" >
+                        <label for="input_question" class="col-md-2 col-form-label">问题描述:</label>
+                        <div class="col-md-10 has-feedback">
+                            <textarea rows="3" class="form-control" name="Q_desc"  id="M_Q_desc" ></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row" >
+                        <label for="input_note" class="col-md-2 col-form-label">根本原因:</label>
+                        <div class="col-md-10 has-feedback">
+                            <textarea rows="3" class="form-control" name="Q_ess"  id="M_Q_ess" ></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row" >
+                        <label for="input_note" class="col-md-2 col-form-label">解决方法:</label>
+                        <div class="col-md-10 has-feedback">
+                            <textarea rows="3" class="form-control" name="R_way"  id="M_R_way" ></textarea>
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group row">
+                        <label for="input_note" class="col-md-2 col-form-label">附件</label>
+                        <div class="col-md-10 has-feedback" >
+                            <input type="file"  name="upload_file" class="form-control input_class">
+                            <span class="help-block"></span>
+                            <span class="glyphiconglyphicon-ok form-control-feedback"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row" >
+                        <label for="input_note" class="col-md-2 col-form-label">Remark</label>
+                        <div class="col-md-10 has-feedback">
+                            <input type="text" class="form-control input_class" id="M_R_mark" >
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary " data-dismiss="modal" onClick="modify_F_T_1();">确认</button>
+                  <button type="submit" class="btn btn-primary " data-dismiss="modal">关闭</button>
+                </div>
+              </form>
+            </div>
+          </div>
+    </div>
+
+    <div class="modal fade" id="add-Equipment-manage" tabindex="-1" role="dialog" aria-labelledby data-backdrop="static" style="">
           <div class="modal-dialog" >
             <div class="modal-content">
               <div class="modal-header">
@@ -634,9 +830,7 @@
                     <div class="form-group row">
                         <label for="input_note"  class="col-md-4 col-form-label">治具编号</label>
                         <div class="col-md-8 has-feedback">
-                            <select class="form-control" id="E_Number" name="box">
-                                <option value=""></option>
-                            </select>
+                            <input type="text" class="form-control input_class" id="E_Number" >
                         </div>
                     </div>
                     <div class="form-group row">
@@ -699,6 +893,112 @@
           </div>
     </div>
 
+     <div class="modal fade" id="modify-E-M" tabindex="-1" role="dialog" aria-labelledby data-backdrop="static" style="">
+          <div class="modal-dialog" >
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">修改治具管理</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              </div>
+              <form class="form-horizontal" role="form" autocomplete="off">
+                <div class="modal-body">
+                    <div class="form-group row yc">
+                        <input type="text" class="form-control input_class" id="modify_E_Manger">
+                    </div>
+                    <div class="form-group row">
+
+                        <label for="input_note"  class="col-md-4 col-form-label">治具编号</label>
+                        <div class="col-md-8 has-feedback">
+                            <input type="text" class="form-control input_class" id="Modify_E_Number" readonly unselectable="on">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="input_note"  class="col-md-4 col-form-label">机种名称</label>
+                        <div class="col-md-8 has-feedback">
+                            <select class="form-control" id="Modify_FA_Pro" name="box">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="input_note"  class="col-md-4 col-form-label">客户名称</label>
+                        <div class="col-md-8 has-feedback">
+                            <select class="form-control" id="Modify_FA_Customer" name="box">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="input_note"  class="col-md-4 col-form-label">所属BU</label>
+                        <div class="col-md-8 has-feedback">
+                            <select class="form-control" id="Modify_FA_BringBU" name="box">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="input_note"  class="col-md-4 col-form-label">治具厂商</label>
+                        <div class="col-md-8 has-feedback">
+                            <select class="form-control" id="Modify_FA_EquipmentVendor" name="box">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="input_note"  class="col-md-4 col-form-label">治具类型</label>
+                        <div class="col-md-8 has-feedback">
+                            <select class="form-control" id="Modify_FA_EquipmentType" name="box">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="input_note"  class="col-md-4 col-form-label">站别</label>
+                        <div class="col-md-8 has-feedback">
+                            <select class="form-control" id="Modify_FA_Stations" name="box">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary " data-dismiss="modal" onClick="Modify_E_M_1();">确认</button>
+                  <button type="submit" class="btn btn-primary " data-dismiss="modal">关闭</button>
+                </div>
+              </form>
+            </div>
+          </div>
+    </div>
+
+    <div class="modal" id="delete-E-M" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+      <div class="modal-dialog" >
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">是否删除机种</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          </div>
+          <form class="form-horizontal" role="form" autocomplete="off" id="my_delete_EM">
+            <div class="modal-body">
+
+                <div class="form-group row yc" >
+                    <div class="col-md-8 has-feedback" >
+                        <input type="text" class="form-control input_class" id="DelEManagerId">
+                        <span class="help-block"></span>
+                        <span class="glyphiconglyphicon-ok form-control-feedback"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary " data-dismiss="modal" onclick="delete_E_M_1();">确定</button>
+              <button type="submit" class="btn btn-primary " data-dismiss="modal">取消</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
     <div class="modal fade" id="add-Projects" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
           <div class="modal-dialog" >
             <div class="modal-content">
@@ -726,6 +1026,62 @@
           </div>
     </div>
 
+    <div class="modal fade" id="modify-project" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+          <div class="modal-dialog" >
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">修改机种名称</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              </div>
+              <form class="form-horizontal" role="form" autocomplete="off">
+                <div class="modal-body">
+                    <div class="form-group row yc">
+                        <input type="text" class="form-control input_class" id="modifyProjectId">
+                    </div>
+                    <div class="form-group row" >
+                        <label for="input_note" class="col-md-4 col-form-label">机种名称</label>
+                        <div class="col-md-8 has-feedback">
+                            <input type="text" class="form-control input_class" id="Modify_projects" >
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary " data-dismiss="modal" onClick="modify_Projects_1();">确认</button>
+                  <button type="submit" class="btn btn-primary " data-dismiss="modal">关闭</button>
+                </div>
+              </form>
+            </div>
+          </div>
+    </div>
+
+    <div class="modal" id="delete-project" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+      <div class="modal-dialog" >
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">是否删除机种</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          </div>
+          <form class="form-horizontal" role="form" autocomplete="off" id="my_delete_Project">
+            <div class="modal-body">
+
+                <div class="form-group row yc" >
+                    <div class="col-md-8 has-feedback" >
+                        <input type="text" class="form-control input_class" id="DelProjectId">
+                        <span class="help-block"></span>
+                        <span class="glyphiconglyphicon-ok form-control-feedback"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary " data-dismiss="modal" onclick="delete_Projects_1();">确定</button>
+              <button type="submit" class="btn btn-primary " data-dismiss="modal">取消</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
     <div class="modal fade" id="add-customers" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
           <div class="modal-dialog" >
             <div class="modal-content">
@@ -751,6 +1107,62 @@
               </form>
             </div>
           </div>
+    </div>
+
+    <div class="modal fade" id="modify-cu" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+      <div class="modal-dialog" >
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">修改客户名称</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          </div>
+          <form class="form-horizontal" role="form" autocomplete="off">
+            <div class="modal-body">
+                <div class="form-group row yc">
+                    <input type="text" class="form-control input_class" id="modifyCustomerId">
+                </div>
+                <div class="form-group row" >
+                    <label for="input_note" class="col-md-4 col-form-label">客户名称</label>
+                    <div class="col-md-8 has-feedback">
+                        <input type="text" class="form-control input_class" id="Modify_CustomersIn" >
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary " data-dismiss="modal" onClick="modify_cu_1();">确认</button>
+              <button type="submit" class="btn btn-primary " data-dismiss="modal">关闭</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" id="delete-cu" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+      <div class="modal-dialog" >
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">是否删除客户</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          </div>
+          <form class="form-horizontal" role="form" autocomplete="off" id="my_delete_Customer">
+            <div class="modal-body">
+
+                <div class="form-group row yc" >
+                    <div class="col-md-8 has-feedback" >
+                        <input type="text" class="form-control input_class" id="DelCustomerId">
+                        <span class="help-block"></span>
+                        <span class="glyphiconglyphicon-ok form-control-feedback"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary " data-dismiss="modal" onclick="delete_cu_1();">确定</button>
+              <button type="submit" class="btn btn-primary " data-dismiss="modal">取消</button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
 
     <div class="modal fade" id="add-bringBU" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
@@ -781,6 +1193,62 @@
           </div>
     </div>
 
+    <div class="modal fade" id="modify-BU" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+          <div class="modal-dialog" >
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">修改所属BU</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              </div>
+              <form class="form-horizontal" role="form" autocomplete="off">
+                <div class="modal-body">
+                    <div class="form-group row yc">
+                        <input type="text" class="form-control input_class" id="modifyBringBUId">
+                    </div>
+                    <div class="form-group row" >
+                        <label for="input_note" class="col-md-4 col-form-label">所属BU名称</label>
+                        <div class="col-md-8 has-feedback">
+                            <input type="text" class="form-control input_class" id="Modify_BringBU" >
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary " data-dismiss="modal" onClick="modify_bu_1();">确认</button>
+                  <button type="submit" class="btn btn-primary " data-dismiss="modal">关闭</button>
+                </div>
+              </form>
+            </div>
+          </div>
+    </div>
+
+    <div class="modal" id="delete-BU" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+      <div class="modal-dialog" >
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">是否删除所属BU</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          </div>
+          <form class="form-horizontal" role="form" autocomplete="off" id="my_delete_BU">
+            <div class="modal-body">
+
+                <div class="form-group row yc" >
+                    <div class="col-md-8 has-feedback" >
+                        <input type="text" class="form-control input_class" id="DelBUId">
+                        <span class="help-block"></span>
+                        <span class="glyphiconglyphicon-ok form-control-feedback"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary " data-dismiss="modal" onclick="delete_bu_1();">确定</button>
+              <button type="submit" class="btn btn-primary " data-dismiss="modal">取消</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
     <div class="modal fade" id="add-EquipmentVendor" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
           <div class="modal-dialog" >
             <div class="modal-content">
@@ -806,6 +1274,62 @@
               </form>
             </div>
           </div>
+    </div>
+
+    <div class="modal fade" id="modify-V" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+      <div class="modal-dialog" >
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">修改治具厂商</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          </div>
+          <form class="form-horizontal" role="form" autocomplete="off">
+            <div class="modal-body">
+                <div class="form-group row yc">
+                    <input type="text" class="form-control input_class" id="modifyVendorId">
+                </div>
+                <div class="form-group row" >
+                    <label for="input_note" class="col-md-4 col-form-label">治具厂商名称</label>
+                    <div class="col-md-8 has-feedback">
+                        <input type="text" class="form-control input_class" id="Modify_Vendor" >
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary " data-dismiss="modal" onClick="modify_vendor_1();">确认</button>
+              <button type="submit" class="btn btn-primary " data-dismiss="modal">关闭</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" id="delete-V" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+      <div class="modal-dialog" >
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">是否删除治具厂商</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          </div>
+          <form class="form-horizontal" role="form" autocomplete="off" id="my_delete_vendor">
+            <div class="modal-body">
+
+                <div class="form-group row yc" >
+                    <div class="col-md-8 has-feedback" >
+                        <input type="text" class="form-control input_class" id="DelVendorId">
+                        <span class="help-block"></span>
+                        <span class="glyphiconglyphicon-ok form-control-feedback"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary " data-dismiss="modal" onclick="delete_vendor_1();">确定</button>
+              <button type="submit" class="btn btn-primary " data-dismiss="modal">取消</button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
 
     <div class="modal fade" id="add-EquipmentType" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
@@ -836,6 +1360,62 @@
           </div>
     </div>
 
+    <div class="modal fade" id="modify-Type" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+      <div class="modal-dialog" >
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">修改治具类型</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          </div>
+          <form class="form-horizontal" role="form" autocomplete="off">
+            <div class="modal-body">
+                <div class="form-group row yc">
+                    <input type="text" class="form-control input_class" id="modifyTypeId">
+                </div>
+                <div class="form-group row" >
+                    <label for="input_note" class="col-md-4 col-form-label">治具类型名称</label>
+                    <div class="col-md-8 has-feedback">
+                        <input type="text" class="form-control input_class" id="Modify_Type" >
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary " data-dismiss="modal" onClick="modify_type_1();">确认</button>
+              <button type="submit" class="btn btn-primary " data-dismiss="modal">关闭</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" id="delete-Type" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+      <div class="modal-dialog" >
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">是否删除治具类型</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          </div>
+          <form class="form-horizontal" role="form" autocomplete="off" id="my_delete_Type">
+            <div class="modal-body">
+
+                <div class="form-group row yc" >
+                    <div class="col-md-8 has-feedback" >
+                        <input type="text" class="form-control input_class" id="DelTypeId">
+                        <span class="help-block"></span>
+                        <span class="glyphiconglyphicon-ok form-control-feedback"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary " data-dismiss="modal" onclick="delete_type_1();">确定</button>
+              <button type="submit" class="btn btn-primary " data-dismiss="modal">取消</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
     <div class="modal fade" id="add-Stations" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
           <div class="modal-dialog" >
             <div class="modal-content">
@@ -862,6 +1442,62 @@
               </form>
             </div>
           </div>
+    </div>
+
+    <div class="modal fade" id="modify-station" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+      <div class="modal-dialog" >
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">修改站别</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          </div>
+          <form class="form-horizontal" role="form" autocomplete="off">
+            <div class="modal-body">
+                <div class="form-group row yc">
+                    <input type="text" class="form-control input_class" id="modifyStationId">
+                </div>
+                <div class="form-group row" >
+                    <label for="input_note" class="col-md-4 col-form-label">站别名称</label>
+                    <div class="col-md-8 has-feedback">
+                        <input type="text" class="form-control input_class" id="Modify_Station" >
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary " data-dismiss="modal" onClick="modify_Station_1();">确认</button>
+              <button type="submit" class="btn btn-primary " data-dismiss="modal">关闭</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" id="delete-station" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+      <div class="modal-dialog" >
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">是否删除站别</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          </div>
+          <form class="form-horizontal" role="form" autocomplete="off" id="my_delete_Station">
+            <div class="modal-body">
+
+                <div class="form-group row yc" >
+                    <div class="col-md-8 has-feedback" >
+                        <input type="text" class="form-control input_class" id="DelStationId">
+                        <span class="help-block"></span>
+                        <span class="glyphiconglyphicon-ok form-control-feedback"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary " data-dismiss="modal" onclick="delete_Station_1();">确定</button>
+              <button type="submit" class="btn btn-primary " data-dismiss="modal">取消</button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
 
     <div class="modal fade" id="add-Questions" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
@@ -893,5 +1529,195 @@
           </div>
     </div>
 
+    <div class="modal fade" id="modify-question" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+      <div class="modal-dialog" >
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">修改问题归类</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          </div>
+          <form class="form-horizontal" role="form" autocomplete="off">
+            <div class="modal-body">
+                <div class="form-group row yc">
+                    <input type="text" class="form-control input_class" id="modifyQuestionId">
+                </div>
+                <div class="form-group row" >
+                    <label for="input_note" class="col-md-4 col-form-label">问题归类名称</label>
+                    <div class="col-md-8 has-feedback">
+                        <input type="text" class="form-control input_class" id="Modify_Question" >
+                    </div>
+                </div>
 
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary " data-dismiss="modal" onClick="modify_Q_C_1();">确认</button>
+              <button type="submit" class="btn btn-primary " data-dismiss="modal">关闭</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" id="delete-question" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+      <div class="modal-dialog" >
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">是否删除问题归类</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          </div>
+          <form class="form-horizontal" role="form" autocomplete="off" id="my_delete_Question">
+            <div class="modal-body">
+
+                <div class="form-group row yc" >
+                    <div class="col-md-8 has-feedback" >
+                        <input type="text" class="form-control input_class" id="DelQuestionId">
+                        <span class="help-block"></span>
+                        <span class="glyphiconglyphicon-ok form-control-feedback"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary " data-dismiss="modal" onclick="delete_Q_C_1();">确定</button>
+              <button type="submit" class="btn btn-primary " data-dismiss="modal">取消</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" id="query_Q" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+          <div class="modal-dialog" >
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">筛选</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              </div>
+              <form class="form-horizontal" role="form" autocomplete="off" id="tb_info">
+                <div class="modal-body">
+                    <div class="form-group row" >
+                        <label for="input_note" class="col-md-4 col-form-label">开始时间 : </label>
+                        <div class="col-md-8 has-feedback">
+                            <input type="text" class="form-control input_class" id="Q_start_Q_time" >
+                            <span class="help-block"></span>
+                            <span class="glyphiconglyphicon-ok form-control-feedback"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row" >
+                        <label for="input_note" class="col-md-4 col-form-label">结束时间 : </label>
+                        <div class="col-md-8 has-feedback">
+                            <input type="text" class="form-control input_class" id="Q_end_Q_time" >
+                            <span class="help-block"></span>
+                            <span class="glyphiconglyphicon-ok form-control-feedback"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row" >
+                        <label for="input_note" class="col-md-4 col-form-label">治具编号 :</label>
+                        <div class="col-md-8 has-feedback">
+                            <select class="form-control" id="Q_equipmentNO" name="Q_equipmentNO">
+                                    <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="input_note" class="col-md-4 col-form-label">问题描述 :</label>
+                        <div class="col-md-8 has-feedback">
+                            <input type="text" class="form-control input_class" id="Q_Q_description">
+                            <span class="help-block"></span>
+                            <span class="glyphiconglyphicon-ok form-control-feedback"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="input_note" class="col-md-4 col-form-label">问题归类 :</label>
+                        <div class="col-md-8 has-feedback">
+                            <select class="form-control" id="Q_Q_type" name="Q_Q_type">
+                                    <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="input_note" class="col-md-4 col-form-label">机种名称 :</label>
+                        <div class="col-md-8 has-feedback">
+                            <select class="form-control" id="Q_projects_name" name="Q_projects_name">
+                                    <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="input_note" class="col-md-4 col-form-label">客户名称 :</label>
+                        <div class="col-md-8 has-feedback">
+                            <select class="form-control" id="Q_Customer_name" name="Q_Customer_name">
+                                    <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="input_note" class="col-md-4 col-form-label">治具厂商 :</label>
+                        <div class="col-md-8 has-feedback">
+                            <select class="form-control" id="Q_Vendor" name="Q_Vendor">
+                                    <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="input_note" class="col-md-4 col-form-label">治具类型 :</label>
+                        <div class="col-md-8 has-feedback">
+                            <select class="form-control" id="Q_equipment_type" name="Q_equipment_type">
+                                    <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary " data-dismiss="modal" onclick="query_FT();">确定</button>
+                  <button type="submit" class="btn btn-primary " data-dismiss="modal">取消</button>
+                </div>
+              </form>
+            </div>
+          </div>
+    </div>
 </div>
+
+
+
+
+<!--<div class="form-group row">-->
+                            <!--<label for="input_note"  class="col-md-8 col-form-label">治具编号</label>-->
+                            <!--<div class="col-md-8 has-feedback">-->
+                                <!--<select class="form-control" id="E_NO" name="box">-->
+                                    <!--<option value=""></option>-->
+                                <!--</select>-->
+                            <!--</div>-->
+                        <!--</div>-->
+
+                        <!--<div class="form-group row">-->
+                        <!--<label for="input_note"  class="col-md-8 col-form-label">线别</label>-->
+                        <!--<div class="col-md-8 has-feedback">-->
+                            <!--<select class="form-control" id="Lines" name="box">-->
+                                <!--<option value="BoxIdTest"></option>-->
+                            <!--</select>-->
+                        <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="form-group row" >-->
+                            <!--<label for="input_note"  class="col-md-8 col-form-label">问题归类</label>-->
+                            <!--<div class="col-md-8 has-feedback">-->
+                                <!--<select class="form-control" id="Q_type" name="box">-->
+                                    <!--<option value=""></option>-->
+                                <!--</select>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="form-group row" >-->
+                        <!--<label for="input_note" class="col-md-8 col-form-label">修复时长</label>-->
+                        <!--<div class="col-md-8 has-feedback">-->
+                            <!--<input type="text" class="form-control input_class" id="R_time" >-->
+                        <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="form-group row" >-->
+                            <!--<label for="input_note" class="col-md-8 col-form-label">分析人员</label>-->
+                            <!--<div class="col-md-8 has-feedback">-->
+                                <!--<input type="text" class="form-control input_class" id="A_Person" >-->
+                            <!--</div>-->
+                        <!--</div>-->
