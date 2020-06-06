@@ -6,7 +6,7 @@ cached-property==1.5.1
 certifi==2019.6.16
 chardet==3.0.4
 defusedxml==0.6.0
-Django==2.1.7
+Django==2.2.13
 django-crontab==0.7.1
 et-xmlfile==1.0.1
 filetype==1.0.5
