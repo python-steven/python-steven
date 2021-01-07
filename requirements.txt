@@ -13,7 +13,7 @@ filetype==1.0.5
 idna==2.8
 isodate==0.6.0
 jdcal==1.4
-lxml==4.4.0
+lxml==4.6.2
 openpyxl==2.6.2
 Pillow==6.0.0
 psycopg2==2.7.7
